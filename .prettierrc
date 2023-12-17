@@ -3,5 +3,9 @@
   "endOfLine": "lf",
   "printWidth": 80,
   "singleQuote": true,
-  "trailingComma": "none"
+  "trailingComma": "none",
+  "useTabs": false,
+  "tabWidth": 2,
+  "semi": true,
+  "bracketSpacing": true
 }
