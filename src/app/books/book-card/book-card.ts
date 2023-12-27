@@ -1,4 +1,5 @@
 import { Component, input, signal } from '@angular/core';
+import { Book } from '../book';
 
 @Component({
   selector: 'app-book-card',
@@ -7,6 +8,5 @@ import { Component, input, signal } from '@angular/core';
 export class BookCard {
   customStyle = signal({ color: '#064D9E', fontWeight: 600 });
 
-  // TODO: Replace any with proper type since can it cause critical runtime errors.
-  readonly content = input<any>();
+  readonly content = input.required<Book>();
 }

@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import { Book } from './books/book';
 import { BookCard } from './books/book-card/book-card';
 
 @Component({
@@ -7,7 +8,7 @@ import { BookCard } from './books/book-card/book-card';
   templateUrl: './app.html'
 })
 export class App {
-  book = signal({
+  book = signal<Book>({
     title: 'How to win friends',
     author: 'Dale Carnegie',
     abstract:
