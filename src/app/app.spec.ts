@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/angular';
 import { App } from './app';
 
-describe('AppComponent', () => {
-  it('renders the title', async () => {
+describe('App', () => {
+  it('renders a book card', async () => {
     await render(App);
 
-    expect(screen.getByText('Hello, Angularian!')).toBeInTheDocument();
+    expect(screen.getByText('Mobby Dick')).toBeInTheDocument();
   });
 });
