@@ -1,14 +1,11 @@
 <div class="m-4 inline-block w-[300px] rounded-xs p-4 shadow-md transition-shadow hover:shadow-xl">
-  <h3>Mobby Dick</h3>
-  <h4 [style]="customStyle()">Hermann Melville</h4>
+  <h3>{{ content().title }}</h3>
+  <h4 [style]="customStyle()">{{ content().author }}</h4>
   <a
     href=""
     class="inline-block cursor-pointer rounded border border-gray-300 px-4 py-2 text-gray-700 transition-colors hover:bg-gray-50"
   >
     Details
   </a>
-  <p>
-    Moby Dick, novel by Herman Melville, published in London in October 1851 as The Whale and a
-    month later in New York City as Moby-Dick; or, The Whale.
-  </p>
+  <p>{{ content().abstract }}</p>
 </div>

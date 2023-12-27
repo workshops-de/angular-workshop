@@ -5,6 +5,6 @@ describe('App', () => {
   it('renders a book card', async () => {
     await render(App);
 
-    expect(screen.getByText('Mobby Dick')).toBeInTheDocument();
+    expect(screen.getByText('How to win friends')).toBeInTheDocument();
   });
 });
