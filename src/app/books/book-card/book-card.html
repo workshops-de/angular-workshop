@@ -1,7 +1,9 @@
 <div class="book-card">
+  <img [src]="placeholderCover" alt="" class="book-cover" />
+
   <div class="book-card-body">
     <h3>Mobby Dick</h3>
-    <h4>Hermann Melville</h4>
+    <h4 [style]="customStyle()">Hermann Melville</h4>
     <p class="book-published">1851-10-18</p>
     <div class="book-card-actions">
       <a href="" class="btn-secondary">More</a>
