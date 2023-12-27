@@ -9,4 +9,10 @@ export class BookCard {
   customStyle = { color: '#064D9E', fontWeight: 600 };
 
   readonly content = input.required<Book>();
+
+  handleDetailClick(click: MouseEvent) {
+    click.preventDefault();
+
+    console.log('Click Details-Link:', click);
+  }
 }
