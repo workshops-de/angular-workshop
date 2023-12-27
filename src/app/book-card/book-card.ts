@@ -5,4 +5,6 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './book-card.html'
 })
-export class BookCard {}
+export class BookCard {
+  customStyle = { color: '#064D9E', fontWeight: 600 };
+}
