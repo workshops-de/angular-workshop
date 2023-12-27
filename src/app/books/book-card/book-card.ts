@@ -11,4 +11,10 @@ export class BookCard {
   readonly placeholderCover = 'book-cover-placeholder.svg';
 
   readonly book = input.required<Book>();
+
+  handleDetailClick(click: MouseEvent) {
+    click.preventDefault();
+
+    console.log('Click Details-Link:', click);
+  }
 }
