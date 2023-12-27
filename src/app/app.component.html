@@ -1,1 +1,3 @@
-<app-book-card [content]="book" (detailClick)="goToBookDetails($event)" />
+@for (book of books; track book.title) {
+  <app-book-card [content]="book" (detailClick)="goToBookDetails($event)" />
+}
