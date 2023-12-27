@@ -3,6 +3,7 @@
   <h4 [style]="customStyle()">{{ content().author }}</h4>
   <a
     href=""
+    (click)="handleDetailClick($event)"
     class="inline-block cursor-pointer rounded border border-gray-300 px-4 py-2 text-gray-700 transition-colors hover:bg-gray-50"
   >
     Details
