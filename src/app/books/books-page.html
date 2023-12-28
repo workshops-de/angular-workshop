@@ -1,0 +1,10 @@
+<input
+  class="m-4 block rounded border border-gray-300 px-5 py-3"
+  type="search"
+  placeholder="Filter your books..."
+  (input)="updateBookSearchTerm($event.target.value)"
+/>
+
+@for (book of books | bookFilter: bookSearchTerm(); track book.title) {
+  <app-book-card [content]="book" (detailClick)="goToBookDetails($event)" />
+}
