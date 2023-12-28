@@ -1,10 +1,1 @@
-<input
-  class="book-filter"
-  type="search"
-  placeholder="Filter your books..."
-  (input)="updateBookSearchTerm($event)"
-/>
-
-@for (book of books | bookFilter: bookSearchTerm; track book.title) {
-  <app-book-card [content]="book" (detailClick)="goToBookDetails($event)" />
-}
+<app-book />
