@@ -14,10 +14,12 @@ export class BookComponent {
   private readonly bookApi = inject(BookApiService);
 
   bookSearchTerm = '';
-  books: Book[];
+  books: Book[] = [];
 
   constructor() {
-    this.books = this.bookApi.getAll();
+    this.bookApi
+      .getAll()
+      .subscribe(booksFromService => (this.books = booksFromService));
   }
 
   goToBookDetails(book: Book) {
