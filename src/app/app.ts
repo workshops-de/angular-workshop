@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
-import { BookCard } from './book-card/book-card';
+import { Component, signal } from '@angular/core';
 import { Book } from './book';
+import { BookCard } from './book-card/book-card';
+import { BookFilter } from './book-filter/book-filter';
 
 @Component({
   selector: 'app-root',
-  imports: [BookCard],
+  imports: [BookCard, BookFilter],
   templateUrl: './app.html'
 })
 export class App {
+  bookSearchTerm = signal('');
   books: Book[] = [
     {
       title: 'How to win friends',
@@ -33,5 +35,9 @@ export class App {
   goToBookDetails(book: Book) {
     console.log('Navigate to book details, soon...');
     console.table(book);
+  }
+
+  updateBookSearchTerm(searchTerm: string) {
+    this.bookSearchTerm.set(searchTerm);
   }
 }
