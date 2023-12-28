@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { Book } from './books/book';
 import { BookCard } from './books/book-card/book-card';
 
@@ -8,6 +8,7 @@ import { BookCard } from './books/book-card/book-card';
   templateUrl: './app.html'
 })
 export class App {
+  searchTerm = signal('');
   books = signal<Book[]>([
     {
       title: 'How to win friends',
@@ -29,6 +30,15 @@ export class App {
         "START WITH WHY shows that the leaders who've had the greatest influence in the world all think, act, and communicate the same way -- and it's the opposite of what everyone else does. Sinek calls this powerful idea The Golden Circle, and it provides a framework upon which organizations can be built, movements can be led, and people can be inspired. And it all starts with WHY."
     }
   ]);
+
+  booksComputed = computed(() => {
+    const searchTerm = this.searchTerm().toLowerCase();
+    const books = this.books();
+
+    return !searchTerm
+      ? books
+      : books.filter(book => book.title.toLowerCase().includes(searchTerm));
+  });
 
   goToBookDetails(book: Book) {
     console.log('Navigate to book details, soon...');
