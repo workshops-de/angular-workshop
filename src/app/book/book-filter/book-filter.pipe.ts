@@ -16,7 +16,10 @@ export class BookFilterPipe implements PipeTransform {
    * @param books A collection of books
    * @param searchTerm The search term to filter books
    */
-  transform(books: Book[] | null, searchTerm: string | null): Book[] {
+  transform(
+    books: Book[] | null | undefined,
+    searchTerm: string | null
+  ): Book[] {
     if (!searchTerm) {
       return books || [];
     }
