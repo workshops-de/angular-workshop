@@ -1,10 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BookCardComponent } from './book-card/book-card.component';
 import { BookFilterPipe } from './book-filter/book-filter.pipe';
 import { Book } from './book';
 import { CommonModule } from '@angular/common';
 import { BookApiService } from './book-api.service';
-import { Subscription } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-book',
@@ -13,21 +13,14 @@ import { Subscription } from 'rxjs';
   templateUrl: './book.component.html',
   styleUrl: './book.component.scss'
 })
-export class BookComponent implements OnInit, OnDestroy {
+export class BookComponent implements OnInit {
   bookSearchTerm = '';
-  books: Book[] = [];
-  bookApiSubscription = Subscription.EMPTY;
+  books$: Observable<Book[]> = EMPTY;
 
   constructor(private readonly bookApi: BookApiService) {}
 
   ngOnInit(): void {
-    this.bookApiSubscription = this.bookApi
-      .getAll()
-      .subscribe(booksFromService => (this.books = booksFromService));
-  }
-
-  ngOnDestroy(): void {
-    this.bookApiSubscription.unsubscribe();
+    this.books$ = this.bookApi.getAll();
   }
 
   goToBookDetails(book: Book) {
