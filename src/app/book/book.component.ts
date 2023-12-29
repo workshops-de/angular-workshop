@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Signal } from '@angular/core';
 import { BookCardComponent } from './book-card/book-card.component';
 import { BookFilterPipe } from './book-filter/book-filter.pipe';
 import { Book } from './book';
 import { CommonModule } from '@angular/common';
 import { BookApiService } from './book-api.service';
-import { EMPTY, Observable } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-book',
@@ -13,14 +13,12 @@ import { EMPTY, Observable } from 'rxjs';
   templateUrl: './book.component.html',
   styleUrl: './book.component.scss'
 })
-export class BookComponent implements OnInit {
+export class BookComponent {
   bookSearchTerm = '';
-  books$: Observable<Book[]> = EMPTY;
+  books: Signal<Book[] | undefined>;
 
-  constructor(private readonly bookApi: BookApiService) {}
-
-  ngOnInit(): void {
-    this.books$ = this.bookApi.getAll();
+  constructor(private readonly bookApi: BookApiService) {
+    this.books = toSignal(this.bookApi.getAll());
   }
 
   goToBookDetails(book: Book) {
