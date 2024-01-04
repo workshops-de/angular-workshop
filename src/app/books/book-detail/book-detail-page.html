@@ -1,0 +1,15 @@
+@if (book$ | async; as book) {
+  <div class="m-4">
+    <h3>
+      {{ book.title }}
+    </h3>
+    <h4>ISBN - {{ book.isbn }}</h4>
+    <section class="grid grid-cols-[2fr_1fr] gap-8">
+      <p>
+        {{ book.abstract }}
+        <i>{{ book.author }}</i>
+      </p>
+      <img [src]="book.cover" [alt]="book.title" class="max-h-[200px]" />
+    </section>
+  </div>
+}
