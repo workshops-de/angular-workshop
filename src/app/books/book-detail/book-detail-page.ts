@@ -1,9 +1,8 @@
-import { Component, inject } from '@angular/core';
-import { Observable, switchMap } from 'rxjs';
-import { Book } from '../book';
-import { ActivatedRoute } from '@angular/router';
-import { BooksClient } from '../books-client';
 import { AsyncPipe } from '@angular/common';
+import { Component, effect, inject, input } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Book } from '../book';
+import { BooksClient } from '../books-client';
 
 @Component({
   selector: 'app-book-detail',
@@ -11,14 +10,16 @@ import { AsyncPipe } from '@angular/common';
   templateUrl: './book-detail-page.html'
 })
 export class BookDetailPage {
-  private readonly route = inject(ActivatedRoute);
   private readonly booksClient = inject(BooksClient);
+  book$!: Observable<Book>;
 
-  book$: Observable<Book>;
+  isbn = input.required<string>();
 
   constructor() {
-    this.book$ = this.route.params.pipe(
-      switchMap(params => this.booksClient.getByIsbn(params?.['isbn']))
-    );
+    effect(() => this.getBookByIsbn(this.isbn()));
+  }
+
+  private getBookByIsbn(isbn: string): void {
+    this.book$ = this.booksClient.getByIsbn(isbn);
   }
 }
