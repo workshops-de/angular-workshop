@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
-import { Observable, switchMap } from 'rxjs';
+import { Component, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Book } from '../book';
-import { ActivatedRoute } from '@angular/router';
 import { BookApiService } from '../book-api.service';
 import { AsyncPipe, NgIf } from '@angular/common';
 
@@ -13,14 +12,12 @@ import { AsyncPipe, NgIf } from '@angular/common';
   styleUrl: './book-detail.component.scss'
 })
 export class BookDetailComponent {
-  book$: Observable<Book>;
+  book$!: Observable<Book>;
 
-  constructor(
-    private readonly route: ActivatedRoute,
-    private readonly bookApi: BookApiService
-  ) {
-    this.book$ = this.route.params.pipe(
-      switchMap(params => this.bookApi.getByIsbn(params?.['isbn']))
-    );
+  constructor(private readonly bookApi: BookApiService) {}
+
+  @Input({ required: true })
+  set isbn(isbn: string) {
+    this.book$ = this.bookApi.getByIsbn(isbn);
   }
 }
