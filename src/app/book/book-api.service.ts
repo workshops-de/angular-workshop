@@ -12,4 +12,8 @@ export class BookApiService {
   getAll(): Observable<Book[]> {
     return this.http.get<Book[]>(`${this.#baseUrl}/books`);
   }
+
+  getByIsbn(isbn: string): Observable<Book> {
+    return this.http.get<Book>(`${this.#baseUrl}/books/${isbn}`);
+  }
 }

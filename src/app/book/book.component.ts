@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
 import { Book } from './book';
 import { BookApiService } from './book-api.service';
 import { BookCardComponent } from './book-card/book-card.component';
@@ -13,14 +14,14 @@ import { BookFilterPipe } from './book-filter/book-filter.pipe';
 })
 export class BookComponent {
   private readonly bookApi = inject(BookApiService);
+  private readonly router = inject(Router);
 
   bookSearchTerm = '';
 
   books = toSignal(this.bookApi.getAll());
 
   goToBookDetails(book: Book) {
-    console.log('Navigate to book details, soon...');
-    console.table(book);
+    this.router.navigate(['books', 'detail', book.isbn]);
   }
 
   updateBookSearchTerm(searchTerm: string) {
