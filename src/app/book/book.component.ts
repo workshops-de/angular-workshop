@@ -5,6 +5,7 @@ import { Book } from './book';
 import { CommonModule } from '@angular/common';
 import { BookApiService } from './book-api.service';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-book',
@@ -17,13 +18,15 @@ export class BookComponent {
   bookSearchTerm = '';
   books: Signal<Book[] | undefined>;
 
-  constructor(private readonly bookApi: BookApiService) {
+  constructor(
+    private readonly bookApi: BookApiService,
+    private readonly router: Router
+  ) {
     this.books = toSignal(this.bookApi.getAll());
   }
 
   goToBookDetails(book: Book) {
-    console.log('Navigate to book details, soon...');
-    console.table(book);
+    this.router.navigate(['books', 'detail', book.isbn]);
   }
 
   updateBookSearchTerm(input: Event) {
