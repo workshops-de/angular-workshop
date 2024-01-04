@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { BookComponent } from './book.component';
+import { confirmLeaveGuardFn } from './confirm-leave.guard';
 
 export const bookRoutes: Routes = [
   {
@@ -9,6 +10,7 @@ export const bookRoutes: Routes = [
   {
     path: 'detail/:isbn',
     loadComponent: () =>
-      import('./book-detail/book-detail.component').then(c => c.BookDetailComponent)
+      import('./book-detail/book-detail.component').then(c => c.BookDetailComponent),
+    canDeactivate: [confirmLeaveGuardFn]
   }
 ];
