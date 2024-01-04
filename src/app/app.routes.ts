@@ -1,7 +1,5 @@
 import { Routes } from '@angular/router';
 import { AboutPage } from './about/about-page';
-import { BookDetailPage } from './books/book-detail-page/book-detail-page';
-import { BooksPage } from './books/books-page';
 
 export const routes: Routes = [
   {
@@ -15,10 +13,6 @@ export const routes: Routes = [
   },
   {
     path: 'books',
-    component: BooksPage
-  },
-  {
-    path: 'books/details/:isbn',
-    component: BookDetailPage
+    loadChildren: () => import('./books/book.routes').then(mod => mod.bookRoutes)
   }
 ];
