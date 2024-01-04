@@ -1,5 +1,6 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
 import { Book } from './book';
 import { BookCard } from './book-card/book-card';
 import { BooksClient } from './books-client';
@@ -10,7 +11,10 @@ import { BooksClient } from './books-client';
   templateUrl: './books-page.html'
 })
 export class BooksPage {
+  private readonly router = inject(Router);
+
   private readonly booksClient = inject(BooksClient);
+  private readonly router = inject(Router);
 
   searchTerm = signal('');
   books = toSignal(this.booksClient.getAll(), { initialValue: [] });
@@ -24,8 +28,7 @@ export class BooksPage {
       : books.filter(book => book.title.toLocaleLowerCase().includes(searchTerm));
   });
 
-  goToBookDetails(book: Book) {
-    console.log('Navigate to book details, soon...');
-    console.table(book);
+  async goToBookDetails(book: Book) {
+    await this.router.navigate(['/books', 'details', book.isbn]);
   }
 }
