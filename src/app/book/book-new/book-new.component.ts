@@ -1,10 +1,19 @@
 import { Component, inject } from '@angular/core';
 import {
+  FormControl,
   FormGroup,
   NonNullableFormBuilder,
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
+
+interface BookForm {
+  isbn: FormControl<string>;
+  title: FormControl<string>;
+  subtitle: FormControl<string>;
+  author: FormControl<string>;
+  abstract: FormControl<string>;
+}
 
 @Component({
   selector: 'app-book-new',
@@ -16,9 +25,9 @@ import {
 export class BookNewComponent {
   private readonly formBuilder = inject(NonNullableFormBuilder);
 
-  form: FormGroup = this.formBuilder.group({
-    isbn: [''],
-    title: [''],
+  form: FormGroup<BookForm> = this.formBuilder.group({
+    isbn: ['', [Validators.required]],
+    title: ['', [Validators.required]],
     subtitle: [''],
     author: ['', [Validators.required]],
     abstract: ['']
