@@ -25,6 +25,9 @@
     <small *ngIf="form.get('author')?.dirty && form.get('author')?.hasError('required')">
       Please insert an Author.
     </small>
+    <small *ngIf="form.get('author')?.dirty && form.get('author')?.hasError('invalidAuthor')">
+      Der Name eines Autors darf keine Zahlen beinhalten!
+    </small>
   </label>
 
   <label class="form-field">

@@ -3,7 +3,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { BookApiService } from '../book-api.service';
 import { take } from 'rxjs';
-import { Book } from '../book';
+import { validAuthorName } from '../validators/author.validator';
 
 @Component({
   selector: 'app-book-new',
@@ -16,7 +16,7 @@ export class BookNewComponent {
   form = this.formBuilder.nonNullable.group({
     title: ['', [Validators.required]],
     subtitle: [''],
-    author: ['', [Validators.required]],
+    author: ['', [Validators.required, validAuthorName()]],
     abstract: [''],
     isbn: ['']
   });
