@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
+import { BookApiService } from '../book-api.service';
 
 interface BookForm {
   isbn: FormControl<string>;
@@ -23,6 +24,7 @@ interface BookForm {
 })
 export class BookNewComponent {
   private readonly formBuilder = inject(NonNullableFormBuilder);
+  private readonly bookApiService = inject(BookApiService);
 
   form: FormGroup<BookForm> = this.formBuilder.group({
     isbn: ['', [Validators.required]],
@@ -33,6 +35,8 @@ export class BookNewComponent {
   });
 
   submit() {
-    console.log(this.form);
+    this.bookApiService
+      .create(this.form.getRawValue())
+      .subscribe();
   }
 }
