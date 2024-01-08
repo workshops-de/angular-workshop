@@ -4,11 +4,19 @@
   <label class="form-field">
     <span>ISBN</span>
     <input formControlName="isbn" />
+    @if (form.controls.isbn.dirty && form.controls.isbn.hasError('required')) {
+      <small>Please insert an Author.</small>
+    }
   </label>
 
   <label class="form-field">
     <span>Title</span>
     <input formControlName="title" />
+    @if (
+      form.controls.title.dirty && form.controls.title.hasError('required')
+    ) {
+      <small>Please insert a title.</small>
+    }
   </label>
 
   <label class="form-field">
@@ -19,6 +27,11 @@
   <label class="form-field">
     <span>Author</span>
     <input formControlName="author" />
+    @if (
+      form.controls.author.dirty && form.controls.author.hasError('required')
+    ) {
+      <small>Please insert an Author.</small>
+    }
   </label>
 
   <label class="form-field">
