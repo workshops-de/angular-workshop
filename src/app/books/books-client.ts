@@ -16,9 +16,7 @@ import { Book, BooksCollectionSchema } from './book';
  *
  */
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class BooksClient {
   private readonly http = inject(HttpClient);
   readonly #baseUrl = 'http://localhost:4730';
@@ -39,6 +37,10 @@ export class BooksClient {
         parse: value => v.parse(BooksCollectionSchema, value)
       }
     );
+  }
+
+  create(book: Partial<Book>): Observable<Book> {
+    return this.http.post<Book>(`${this.#baseUrl}/books`, book);
   }
 
   delete(isbn: string): Observable<void> {
