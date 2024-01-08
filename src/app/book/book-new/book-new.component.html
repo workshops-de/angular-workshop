@@ -4,6 +4,9 @@
   <label class="form-field">
     <span>Title</span>
     <input formControlName="title" />
+    <small *ngIf="form.get('title')?.dirty && form.get('title')?.hasError('required')">
+      Please insert a title.
+    </small>
   </label>
 
   <label class="form-field">
@@ -14,15 +17,17 @@
   <label class="form-field">
     <span>Author</span>
     <input formControlName="author" />
+    <small *ngIf="form.get('author')?.dirty && form.get('author')?.hasError('required')">
+      Please insert an Author.
+    </small>
   </label>
 
   <label class="form-field">
-
     <span>Abstract</span>
     <input formControlName="abstract" />
   </label>
 
   <div class="form-actions">
-    <button type="submit">Save</button>
+    <button type="submit" [disabled]="form.invalid">Save</button>
   </div>
 </form>

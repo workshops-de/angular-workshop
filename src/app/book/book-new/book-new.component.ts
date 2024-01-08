@@ -1,18 +1,19 @@
 import { Component } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-book-new',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgIf],
   templateUrl: './book-new.component.html',
   styleUrls: ['./book-new.component.scss']
 })
 export class BookNewComponent {
   form = this.formBuilder.group({
-    title: [''],
+    title: ['', [Validators.required]],
     subtitle: [''],
-    author: [''],
+    author: ['', [Validators.required]],
     abstract: ['']
   });
 
