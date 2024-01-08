@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { form, FormField, FormRoot } from '@angular/forms/signals';
+import { form, FormField, FormRoot, required } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-book-new',
@@ -15,12 +15,20 @@ export class BookNewPage {
     abstract: ''
   });
 
-  protected readonly form = form(this.model, {
-    submission: {
-      action: formField => {
-        console.log(formField().controlValue(), this.model());
-        return Promise.resolve(null);
+  protected readonly form = form(
+    this.model,
+    schemaPath => {
+      required(schemaPath.isbn, { message: 'Please insert an ISBN.' });
+      required(schemaPath.title, { message: 'Please insert a title.' });
+      required(schemaPath.author, { message: 'Please insert an Author.' });
+    },
+    {
+      submission: {
+        action: formField => {
+          console.log(formField().controlValue(), this.model());
+          return Promise.resolve(null);
+        }
       }
     }
-  });
+  );
 }
