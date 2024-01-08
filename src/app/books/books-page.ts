@@ -1,20 +1,19 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Book } from './book';
 import { BookCard } from './book-card/book-card';
 import { BooksClient } from './books-client';
 
 @Component({
   selector: 'app-book',
-  imports: [BookCard],
+  imports: [BookCard, RouterLink],
   templateUrl: './books-page.html'
 })
 export class BooksPage {
   private readonly router = inject(Router);
 
   private readonly booksClient = inject(BooksClient);
-  private readonly router = inject(Router);
 
   searchTerm = signal('');
   books = toSignal(this.booksClient.getAll(), { initialValue: [] });
