@@ -5,6 +5,10 @@
   (input)="updateBookSearchTerm($event)"
 />
 
+<div>
+  <a routerLink="new">Create Book</a>
+</div>
+
 @for (book of books() | bookFilter: bookSearchTerm; track book.isbn) {
   <app-book-card [content]="book" (detailClick)="goToBookDetails($event)" />
 }
