@@ -1,0 +1,40 @@
+<div class="m-4">
+  <h2>New</h2>
+
+  <form [formRoot]="form">
+    <label class="mt-4 block">
+      <span class="mb-2 block">ISBN</span>
+      <input [formField]="form.isbn" class="min-w-[250px] rounded border border-gray-300 px-5 py-3" />
+    </label>
+
+    <label class="mt-4 block">
+      <span class="mb-2 block">Title</span>
+      <input [formField]="form.title" class="min-w-[250px] rounded border border-gray-300 px-5 py-3" />
+    </label>
+
+    <label class="mt-4 block">
+      <span class="mb-2 block">Subtitle</span>
+      <input [formField]="form.subtitle" class="min-w-[250px] rounded border border-gray-300 px-5 py-3" />
+    </label>
+
+    <label class="mt-4 block">
+      <span class="mb-2 block">Author</span>
+      <input [formField]="form.author" class="min-w-[250px] rounded border border-gray-300 px-5 py-3" />
+    </label>
+
+    <label class="mt-4 block">
+      <span class="mb-2 block">Abstract</span>
+      <input [formField]="form.abstract" class="min-w-[250px] rounded border border-gray-300 px-5 py-3" />
+    </label>
+
+    <div class="mt-4">
+      <button
+        type="submit"
+        [disabled]="form().invalid()"
+        class="cursor-pointer rounded bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+      >
+        Save
+      </button>
+    </div>
+  </form>
+</div>
