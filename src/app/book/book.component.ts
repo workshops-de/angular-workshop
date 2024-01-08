@@ -5,12 +5,12 @@ import { Book } from './book';
 import { CommonModule } from '@angular/common';
 import { BookApiService } from './book-api.service';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-book',
   standalone: true,
-  imports: [CommonModule, BookCardComponent, BookFilterPipe],
+  imports: [CommonModule, BookCardComponent, BookFilterPipe, RouterLink, RouterLinkActive],
   templateUrl: './book.component.html',
   styleUrl: './book.component.scss'
 })
