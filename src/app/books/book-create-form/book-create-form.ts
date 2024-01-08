@@ -1,5 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, output, signal } from '@angular/core';
 import { form, FormField, FormRoot, required } from '@angular/forms/signals';
+import { firstValueFrom } from 'rxjs';
+import { BooksClient } from '../books-client';
 
 @Component({
   selector: 'app-book-create-form',
@@ -7,6 +9,11 @@ import { form, FormField, FormRoot, required } from '@angular/forms/signals';
   templateUrl: './book-create-form.html'
 })
 export class BookCreateForm {
+  private readonly booksClient = inject(BooksClient);
+
+  // Tells the page that the book has been saved.
+  readonly saved = output<void>();
+
   protected readonly model = signal({
     isbn: '',
     title: '',
@@ -24,9 +31,14 @@ export class BookCreateForm {
     },
     {
       submission: {
-        action: formField => {
-          console.log(formField().controlValue(), this.model());
-          return Promise.resolve(null);
+        action: async () => {
+          try {
+            await firstValueFrom(this.booksClient.create(this.model()));
+            this.saved.emit();
+            return null;
+          } catch {
+            return { kind: 'server', message: 'Failed to create book' };
+          }
         }
       }
     }
