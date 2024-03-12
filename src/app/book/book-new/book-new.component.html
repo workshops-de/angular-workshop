@@ -19,16 +19,26 @@
     <input formControlName="subtitle" />
   </label>
 
-  <label class="form-field">
-    <span>Author</span>
-    <input formControlName="author" />
-    <small *ngIf="form.get('author')?.dirty && form.get('author')?.hasError('required')">
-      Please insert an Author.
-    </small>
-    <small *ngIf="form.get('author')?.dirty && form.get('author')?.hasError('invalidAuthor')">
-      Der Name eines Autors darf keine Zahlen beinhalten!
-    </small>
-  </label>
+  <ng-container formArrayName="authors">
+    <ng-container *ngFor="let author of authors.controls; let i = index">
+      <label class="form-field">
+        <span>Author</span>
+        <input [formControlName]="i" />
+        <small *ngIf="author?.dirty && author?.hasError('required')">
+          Please insert an Author.
+        </small>
+        <small *ngIf="author?.dirty && author?.hasError('invalidAuthor')">
+          Der Name eines Autors darf keine Zahlen beinhalten!
+        </small>
+      </label>
+      <button (click)="deleteAuthor(i)">
+        Remove Author
+      </button>
+    </ng-container>
+  </ng-container>
+  <button type="button" (click)="addAuthor()">
+    Author hinzufügen
+  </button>
 
   <label class="form-field">
     <span>Abstract</span>
