@@ -7,6 +7,7 @@ import {
   Validators
 } from '@angular/forms';
 import { BookApiService } from '../book-api.service';
+import { validAuthorName } from '../validators/author.validator';
 
 interface BookForm {
   isbn: FormControl<string>;
@@ -30,7 +31,7 @@ export class BookNewComponent {
     isbn: ['', [Validators.required]],
     title: ['', [Validators.required]],
     subtitle: [''],
-    author: ['', [Validators.required]],
+    author: ['', [Validators.required, validAuthorName()]],
     abstract: ['']
   });
 

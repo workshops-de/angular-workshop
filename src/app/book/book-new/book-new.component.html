@@ -27,10 +27,12 @@
   <label class="form-field">
     <span>Author</span>
     <input formControlName="author" />
-    @if (
-      form.controls.author.dirty && form.controls.author.hasError('required')
-    ) {
-      <small>Please insert an Author.</small>
+    @if (form.controls.author.dirty) {
+      @if (form.controls.author.hasError('required')) {
+        <small>Please insert an Author.</small>
+      } @else if (form.controls.author.hasError('invalidAuthor')) {
+        <small>Name must not contain digits</small>
+      }
     }
   </label>
 
