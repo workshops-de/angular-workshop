@@ -2,6 +2,7 @@ import { Component, inject, output, signal } from '@angular/core';
 import { form, FormField, FormRoot, required } from '@angular/forms/signals';
 import { firstValueFrom } from 'rxjs';
 import { BooksClient } from '../books-client';
+import { validAuthorName } from '../validators/author';
 
 @Component({
   selector: 'app-book-create-form',
@@ -28,6 +29,7 @@ export class BookCreateForm {
       required(schemaPath.isbn, { message: 'Please insert an ISBN.' });
       required(schemaPath.title, { message: 'Please insert a title.' });
       required(schemaPath.author, { message: 'Please insert an Author.' });
+      validAuthorName(schemaPath.author);
     },
     {
       submission: {
