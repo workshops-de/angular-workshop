@@ -24,17 +24,24 @@
     <input formControlName="subtitle" />
   </label>
 
-  <label class="form-field">
-    <span>Author</span>
-    <input formControlName="author" />
-    @if (form.controls.author.dirty) {
-      @if (form.controls.author.hasError('required')) {
-        <small>Please insert an Author.</small>
-      } @else if (form.controls.author.hasError('invalidAuthor')) {
-        <small>Name must not contain digits</small>
-      }
+  <ng-container formArrayName="authors">
+    @for (author of authors.controls; track author; let index = $index) {
+      <label class="form-field">
+        <span>Author</span>
+        <input [formControlName]="index" />
+
+        @if (author.dirty) {
+          @if (author.hasError('required')) {
+            <small>Please insert an Author.</small>
+          } @else if (author.hasError('invalidAuthor')) {
+            <small>Name must not contain digits</small>
+          }
+        }
+      </label>
+      <button (click)="deleteAuthor(index)">Remove Author</button>
     }
-  </label>
+  </ng-container>
+  <button type="button" (click)="addAuthor()">Author hinzufügen</button>
 
   <label class="form-field">
     <span>Abstract</span>
