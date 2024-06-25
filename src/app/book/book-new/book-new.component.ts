@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import {
+  FormArray,
   FormControl,
   FormGroup,
   NonNullableFormBuilder,
@@ -13,7 +14,7 @@ interface BookForm {
   isbn: FormControl<string>;
   title: FormControl<string>;
   subtitle: FormControl<string>;
-  author: FormControl<string>;
+  authors: FormArray<FormControl<string>>;
   abstract: FormControl<string>;
 }
 
@@ -31,13 +32,33 @@ export class BookNewComponent {
     isbn: ['', [Validators.required]],
     title: ['', [Validators.required]],
     subtitle: [''],
-    author: ['', [Validators.required, validAuthorName()]],
+    authors: this.formBuilder.array([
+      ['', [Validators.required, validAuthorName()]]
+    ]),
     abstract: ['']
   });
 
   submit() {
+    this.bookApiService.create(this.form.getRawValue()).subscribe();
+    // We need to handle the formArray now for authors separately
+    // Unfortunately the backend doesn't handle multiple authors yet
+    const firstAuthor = this.form.getRawValue().authors[0] || 'n/a';
     this.bookApiService
-      .create(this.form.getRawValue())
+      .create({ ...this.form.getRawValue(), author: firstAuthor })
       .subscribe();
+  }
+
+  get authors(): FormArray {
+    return this.form.controls.authors;
+  }
+
+  deleteAuthor(authorIndex: number) {
+    this.authors.removeAt(authorIndex);
+  }
+
+  addAuthor() {
+    this.authors.push(
+      this.formBuilder.control('', [Validators.required, validAuthorName()])
+    );
   }
 }
