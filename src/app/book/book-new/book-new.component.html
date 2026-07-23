@@ -4,11 +4,17 @@
   <label class="form-field">
     <span>ISBN</span>
     <input [formField]="form.isbn" />
+    @if (form.isbn().touched() && form.isbn().getError('required')) {
+      <small>Please insert an Author.</small>
+    }
   </label>
 
   <label class="form-field">
     <span>Title</span>
     <input [formField]="form.title" />
+    @if (form.title().touched() && form.title().getError('required')) {
+      <small>Please insert a title.</small>
+    }
   </label>
 
   <label class="form-field">
@@ -19,6 +25,9 @@
   <label class="form-field">
     <span>Author</span>
     <input [formField]="form.author" />
+    @if (form.author().touched() && form.author().getError('required')) {
+      <small>Please insert an Author.</small>
+    }
   </label>
 
   <label class="form-field">
