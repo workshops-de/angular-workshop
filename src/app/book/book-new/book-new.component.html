@@ -1,0 +1,32 @@
+<h2>New</h2>
+
+<form [formRoot]="form">
+  <label class="form-field">
+    <span>ISBN</span>
+    <input [formField]="form.isbn" />
+  </label>
+
+  <label class="form-field">
+    <span>Title</span>
+    <input [formField]="form.title" />
+  </label>
+
+  <label class="form-field">
+    <span>Subtitle</span>
+    <input [formField]="form.subtitle" />
+  </label>
+
+  <label class="form-field">
+    <span>Author</span>
+    <input [formField]="form.author" />
+  </label>
+
+  <label class="form-field">
+    <span>Abstract</span>
+    <input [formField]="form.abstract" />
+  </label>
+
+  <div class="form-actions">
+    <button type="submit" [disabled]="form().invalid()">Save</button>
+  </div>
+</form>

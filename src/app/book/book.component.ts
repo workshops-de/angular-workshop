@@ -1,6 +1,6 @@
 import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Book } from './book';
 import { BookApiService } from './book-api.service';
 import { BookCardComponent } from './book-card/book-card.component';
@@ -8,7 +8,7 @@ import { BookFilterPipe } from './book-filter/book-filter.pipe';
 
 @Component({
   selector: 'app-book',
-  imports: [BookCardComponent, BookFilterPipe],
+  imports: [BookCardComponent, BookFilterPipe, RouterLink],
   templateUrl: './book.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './book.component.scss'
