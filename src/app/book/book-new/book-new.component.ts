@@ -1,5 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { form, FormField, FormRoot, required } from '@angular/forms/signals';
+import { firstValueFrom } from 'rxjs';
+import { BookApiService } from '../book-api.service';
 
 @Component({
   selector: 'app-book-new',
@@ -8,6 +10,8 @@ import { form, FormField, FormRoot, required } from '@angular/forms/signals';
   styleUrls: ['./book-new.component.scss']
 })
 export class BookNewComponent {
+  private readonly bookApiService = inject(BookApiService);
+
   protected readonly model = signal({
     isbn: '',
     title: '',
@@ -25,10 +29,9 @@ export class BookNewComponent {
     },
     {
       submission: {
-        action: formField => {
-          console.log(formField().controlValue(), this.model());
-          // No validation errors
-          return Promise.resolve(null);
+        action: async () => {
+          await firstValueFrom(this.bookApiService.create(this.model()));
+          return null;
         }
       }
     }
