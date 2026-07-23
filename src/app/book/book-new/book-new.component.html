@@ -25,8 +25,12 @@
   <label class="form-field">
     <span>Author</span>
     <input [formField]="form.author" />
-    @if (form.author().touched() && form.author().getError('required')) {
-      <small>Please insert an Author.</small>
+    @if (form.author().touched()) {
+      @if (form.author().getError('required')) {
+        <small>Please insert an Author.</small>
+      } @else if (form.author().getError('invalidAuthor')) {
+        <small>Name must not contain digits</small>
+      }
     }
   </label>
 

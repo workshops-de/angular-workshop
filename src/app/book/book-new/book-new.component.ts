@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { form, FormField, FormRoot, required } from '@angular/forms/signals';
 import { firstValueFrom } from 'rxjs';
 import { BookApiService } from '../book-api.service';
+import { validAuthorName } from '../validators/author.validator';
 
 @Component({
   selector: 'app-book-new',
@@ -26,6 +27,7 @@ export class BookNewComponent {
       required(schemaPath.isbn);
       required(schemaPath.title);
       required(schemaPath.author);
+      validAuthorName(schemaPath.author);
     },
     {
       submission: {
