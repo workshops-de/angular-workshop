@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { form, FormField, FormRoot, minLength, required } from '@angular/forms/signals';
+import { applyEach, form, FormField, FormRoot, minLength, required } from '@angular/forms/signals';
 import { firstValueFrom } from 'rxjs';
 import { BookApiService } from '../book-api.service';
 import { validAuthorName } from '../validators/author.validator';
@@ -18,7 +18,7 @@ export class BookNewComponent {
     isbn: '',
     title: '',
     subtitle: '',
-    author: '',
+    authors: [''],
     abstract: ''
   });
 
@@ -29,16 +29,34 @@ export class BookNewComponent {
       minLength(schemaPath.isbn, 5);
       uniqueIsbn(schemaPath.isbn, this.bookApiService);
       required(schemaPath.title);
-      required(schemaPath.author);
-      validAuthorName(schemaPath.author);
+      applyEach(schemaPath.authors, author => {
+        required(author);
+        validAuthorName(author);
+      });
     },
     {
       submission: {
         action: async () => {
-          await firstValueFrom(this.bookApiService.create(this.model()));
+          // We need to handle the authors array now separately
+          // Unfortunately the backend doesn't handle multiple authors yet
+          const firstAuthor = this.model().authors[0] || 'n/a';
+          await firstValueFrom(
+            this.bookApiService.create({ ...this.model(), author: firstAuthor })
+          );
           return null;
         }
       }
     }
   );
+
+  addAuthor() {
+    this.model.update(m => ({ ...m, authors: [...m.authors, ''] }));
+  }
+
+  deleteAuthor(authorIndex: number) {
+    this.model.update(m => ({
+      ...m,
+      authors: m.authors.filter((_, index) => index !== authorIndex)
+    }));
+  }
 }

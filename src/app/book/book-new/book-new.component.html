@@ -30,17 +30,21 @@
     <input [formField]="form.subtitle" />
   </label>
 
-  <label class="form-field">
-    <span>Author</span>
-    <input [formField]="form.author" />
-    @if (form.author().touched()) {
-      @if (form.author().getError('required')) {
-        <small>Please insert an Author.</small>
-      } @else if (form.author().getError('invalidAuthor')) {
-        <small>Name must not contain digits</small>
+  @for (author of form.authors; track $index; let authorIndex = $index) {
+    <label class="form-field">
+      <span>Author</span>
+      <input [formField]="author" />
+      @if (author().touched()) {
+        @if (author().getError('required')) {
+          <small>Please insert an Author.</small>
+        } @else if (author().getError('invalidAuthor')) {
+          <small>Name must not contain digits</small>
+        }
       }
-    }
-  </label>
+    </label>
+    <button type="button" (click)="deleteAuthor(authorIndex)">Remove Author</button>
+  }
+  <button type="button" (click)="addAuthor()">Author hinzufügen</button>
 
   <label class="form-field">
     <span>Abstract</span>
