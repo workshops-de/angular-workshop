@@ -1,8 +1,9 @@
 import { Component, inject, signal } from '@angular/core';
-import { form, FormField, FormRoot, required } from '@angular/forms/signals';
+import { form, FormField, FormRoot, minLength, required } from '@angular/forms/signals';
 import { firstValueFrom } from 'rxjs';
 import { BookApiService } from '../book-api.service';
 import { validAuthorName } from '../validators/author.validator';
+import { uniqueIsbn } from '../validators/isbn.validator';
 
 @Component({
   selector: 'app-book-new',
@@ -25,6 +26,8 @@ export class BookNewComponent {
     this.model,
     schemaPath => {
       required(schemaPath.isbn);
+      minLength(schemaPath.isbn, 5);
+      uniqueIsbn(schemaPath.isbn, this.bookApiService);
       required(schemaPath.title);
       required(schemaPath.author);
       validAuthorName(schemaPath.author);

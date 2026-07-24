@@ -4,8 +4,16 @@
   <label class="form-field">
     <span>ISBN</span>
     <input [formField]="form.isbn" />
-    @if (form.isbn().touched() && form.isbn().getError('required')) {
-      <small>Please insert an Author.</small>
+    @if (form.isbn().touched()) {
+      @if (form.isbn().getError('required')) {
+        <small>Please insert an Author.</small>
+      } @else if (form.isbn().getError('minLength')) {
+        <small>ISBN must be at least 5 characters long</small>
+      } @else if (form.isbn().pending()) {
+        <small>Checking ISBN…</small>
+      } @else if (form.isbn().getError('duplicateIsbn')) {
+        <small>This ISBN already exists</small>
+      }
     }
   </label>
 
