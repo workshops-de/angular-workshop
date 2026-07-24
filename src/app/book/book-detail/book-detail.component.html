@@ -10,4 +10,5 @@
     </p>
     <img [src]="book.cover" [alt]="book.title" class="book-cover" />
   </section>
+  <a [routerLink]="['/books/edit', book.isbn]">Edit</a>
 }

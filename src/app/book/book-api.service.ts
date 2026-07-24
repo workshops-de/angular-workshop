@@ -19,4 +19,8 @@ export class BookApiService {
   create(book: Partial<Book>): Observable<Book> {
     return this.http.post<Book>('http://localhost:4730/books', book);
   }
+
+  update(isbn: string, book: Partial<Book>): Observable<Book> {
+    return this.http.put<Book>(`${this.baseUrl}/books/${isbn}`, book);
+  }
 }

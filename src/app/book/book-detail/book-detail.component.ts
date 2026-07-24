@@ -1,12 +1,13 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, effect, inject, input, ChangeDetectionStrategy } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Book } from '../book';
 import { BookApiService } from '../book-api.service';
 
 @Component({
   selector: 'app-book-detail',
-  imports: [AsyncPipe],
+  imports: [AsyncPipe, RouterLink],
   templateUrl: './book-detail.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './book-detail.component.scss'
