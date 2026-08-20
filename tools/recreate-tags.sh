@@ -1,13 +1,14 @@
 #!/bin/bash
 
 # First delete all old tags
-deletedTags=$(git tag | grep solve-- | xargs git tag -d)
+deletedTags=$(git tag | grep '^solve--' | xargs git tag -d)
 
-# Read all commits (one per line)
-logs=$(git log --oneline | grep solve--)
+# Read all commits (one per line) whose message starts with "solve--"
+logs=$(git log --oneline | grep -E '^[0-9a-f]+ solve--')
 
 # read every line of git log
 IFS=$'\n'
+tagNames=()
 for line in $logs; do
   # split to $sha and rest(commit $message) by first space
   IFS=' '
@@ -21,7 +22,10 @@ for line in $logs; do
 
   echo $message
   git tag $message $sha
-  git push origin :$message
-  git push origin $message
+  tagNames+=("$message")
 done
+
+# Push all (re-)created tags in a single network round-trip, overwriting
+# any remote tags of the same name instead of deleting+recreating each one.
+git push --force origin "${tagNames[@]}"
 
