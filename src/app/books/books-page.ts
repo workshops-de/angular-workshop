@@ -13,7 +13,11 @@ export class BooksPage {
   private readonly booksClient = inject(BooksClient);
 
   bookSearchTerm = signal('');
-  books: Book[] = this.booksClient.getAll();
+  books = signal<Book[]>([]);
+
+  constructor() {
+    this.booksClient.getAll().subscribe(booksFromService => this.books.set(booksFromService));
+  }
 
   goToBookDetails(book: Book) {
     console.log('Navigate to book details, soon...');
