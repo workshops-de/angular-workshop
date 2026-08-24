@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/angular';
-import { AppComponent } from './app.component';
+import { App } from './app';
 
 describe('AppComponent', () => {
   it('renders the title', async () => {
-    await render(AppComponent);
+    await render(App);
 
     expect(screen.getByText('Hello, Angularian!')).toBeInTheDocument();
   });
