@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "solution.next": "bash tools/next-solution.sh"
+    "solution.next": "git show main:tools/next-solution.sh | bash"
   },
   "private": true,
   "dependencies": {
