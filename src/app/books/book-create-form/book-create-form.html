@@ -39,6 +39,39 @@
       }
     </label>
 
+    <fieldset class="field-collection">
+      <legend class="field-label-text">Co-authors</legend>
+
+      @for (coAuthor of form.coAuthors; track $index; let coAuthorIndex = $index) {
+        <div class="field-collection-row">
+          <input
+            class="field-input min-w-0 flex-1"
+            [formField]="coAuthor"
+            placeholder="Co-author name"
+          />
+          <button
+            type="button"
+            class="btn-icon-danger"
+            (click)="removeCoAuthor(coAuthorIndex)"
+            aria-label="Remove co-author"
+          >
+            ✕
+          </button>
+        </div>
+        @if (coAuthor().touched()) {
+          @for (error of coAuthor().errors(); track error.kind) {
+            <small class="field-error">{{ error.message }}</small>
+          }
+        }
+      } @empty {
+        <p class="field-hint">No co-authors yet.</p>
+      }
+
+      <button type="button" class="btn-secondary btn-add" (click)="addCoAuthor()">
+        + Add co-author
+      </button>
+    </fieldset>
+
     <label class="field-label">
       <span class="field-label-text">Abstract</span>
       <input class="field-input w-full" [formField]="form.abstract" />

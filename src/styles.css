@@ -46,6 +46,15 @@
     @apply border-red-200 bg-red-50 text-red-700;
   }
 }
+@utility btn-icon-danger {
+  @apply flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded border border-gray-300 text-gray-500 transition-colors;
+  &:hover {
+    @apply border-red-300 bg-red-50 text-red-700;
+  }
+}
+@utility btn-add {
+  @apply justify-self-start text-sm;
+}
 
 /* --- Form fields --- */
 @utility search-field {
@@ -65,6 +74,12 @@
 }
 @utility field-hint {
   @apply block text-blue-500;
+}
+@utility field-collection {
+  @apply mt-4 grid gap-2 rounded-lg border border-gray-200 bg-gray-50 p-4;
+}
+@utility field-collection-row {
+  @apply flex items-center gap-2;
 }
 
 /* --- Cards --- */
