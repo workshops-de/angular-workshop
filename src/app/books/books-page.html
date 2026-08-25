@@ -15,5 +15,12 @@
 </div>
 
 @for (book of booksComputed(); track book.isbn) {
-<app-book-card [content]="book" (detailClick)="goToBookDetails($event)" />
+<app-book-card [content]="book">
+  <a
+    [routerLink]="['detail', book.isbn]"
+    class="inline-block cursor-pointer rounded border border-gray-300 px-4 py-2 text-gray-700 transition-colors hover:bg-gray-50"
+  >
+    Details
+  </a>
+</app-book-card>
 }

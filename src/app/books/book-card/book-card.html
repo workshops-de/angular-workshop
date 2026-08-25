@@ -1,12 +1,8 @@
 <div class="m-4 inline-block w-[300px] rounded-xs p-4 shadow-md transition-shadow hover:shadow-xl">
   <h3>{{ content().title }}</h3>
   <h4 [style]="customStyle()">{{ content().author }}</h4>
-  <a
-    href=""
-    (click)="handleDetailClick($event)"
-    class="inline-block cursor-pointer rounded border border-gray-300 px-4 py-2 text-gray-700 transition-colors hover:bg-gray-50"
-  >
-    Details
-  </a>
+
+  <ng-content />
+
   <p>{{ content().abstract }}</p>
 </div>

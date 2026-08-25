@@ -1,4 +1,4 @@
-import { Component, input, output, signal } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
 import { Book } from '../book';
 
 @Component({
@@ -9,13 +9,4 @@ export class BookCard {
   customStyle = signal({ color: '#064D9E', fontWeight: 600 });
 
   readonly content = input.required<Book>();
-  readonly detailClick = output<Book>();
-
-  handleDetailClick(click: MouseEvent) {
-    click.preventDefault();
-
-    console.log('Click Details-Link:', click);
-
-    this.detailClick.emit(this.content());
-  }
 }
