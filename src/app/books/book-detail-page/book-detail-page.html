@@ -17,8 +17,7 @@
     </a>
 
     <div class="book-card-actions">
-      <!-- Forms lesson (Edit book): [routerLink]="['/books', 'edit', isbn()]" -->
-      <a class="btn-secondary">Edit</a>
+      <a [routerLink]="['/books', 'edit', isbn()]" class="btn-secondary">Edit</a>
       <!-- Bonus (Router): (click)="deleteBook()" -->
       <button type="button" class="btn-danger">Delete</button>
     </div>
