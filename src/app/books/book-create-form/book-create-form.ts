@@ -1,5 +1,5 @@
 import { Component, inject, output, signal } from '@angular/core';
-import { form, FormField, FormRoot, required } from '@angular/forms/signals';
+import { applyEach, form, FormField, FormRoot, required } from '@angular/forms/signals';
 import { firstValueFrom } from 'rxjs';
 import { BooksClient } from '../books-client';
 import { validAuthorName } from '../validators/author';
@@ -16,12 +16,16 @@ export class BookCreateForm {
   // Tells the page that the book has been saved.
   readonly saved = output<void>();
 
+  // The form model mirrors the Book payload, so submission can hand it straight
+  // to the API. `author` stays a single value, `coAuthors` is the collection.
   protected readonly model = signal({
     isbn: '',
     title: '',
     subtitle: '',
     author: '',
-    abstract: ''
+    coAuthors: [] as string[],
+    abstract: '',
+    cover: ''
   });
 
   protected readonly form = form(
@@ -32,11 +36,16 @@ export class BookCreateForm {
       required(schemaPath.title, { message: 'Please insert a title.' });
       required(schemaPath.author, { message: 'Please insert an Author.' });
       validAuthorName(schemaPath.author);
+      applyEach(schemaPath.coAuthors, coAuthor => {
+        required(coAuthor, { message: 'Please insert a co-author name.' });
+        validAuthorName(coAuthor);
+      });
     },
     {
       submission: {
         action: async () => {
           try {
+            // The model already matches the Book schema – no reshaping needed.
             await firstValueFrom(this.booksClient.create(this.model()));
             this.saved.emit();
             return null;
@@ -47,4 +56,12 @@ export class BookCreateForm {
       }
     }
   );
+
+  addCoAuthor() {
+    this.model.update(m => ({ ...m, coAuthors: [...m.coAuthors, ''] }));
+  }
+
+  removeCoAuthor(coAuthorIndex: number) {
+    this.model.update(m => ({ ...m, coAuthors: m.coAuthors.filter((_, i) => i !== coAuthorIndex) }));
+  }
 }
