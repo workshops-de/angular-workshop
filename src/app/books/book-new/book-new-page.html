@@ -22,7 +22,7 @@
         class="min-w-[250px] rounded border border-gray-300 px-5 py-3"
       />
       @if (form.title().touched()) { @for (error of form.title().errors(); track error.kind) {
-      <small class="block text-gray-700">{{ error.message }}</small>
+      <small class="block text-red-700">{{ error.message }}</small>
       } }
     </label>
 
@@ -34,16 +34,29 @@
       />
     </label>
 
+    @for (author of form.authors; track $index; let authorIndex = $index) {
     <label class="mt-4 block">
       <span class="mb-2 block">Author</span>
-      <input
-        [formField]="form.author"
-        class="min-w-[250px] rounded border border-gray-300 px-5 py-3"
-      />
-      @if (form.author().touched()) { @for (error of form.author().errors(); track error.kind) {
-      <small class="block text-gray-700">{{ error.message }}</small>
+      <input [formField]="author" class="min-w-[250px] rounded border border-gray-300 px-5 py-3" />
+      @if (author().touched()) { @for (error of author().errors(); track error.kind) {
+      <small class="block text-red-700">{{ error.message }}</small>
       } }
     </label>
+    <button
+      type="button"
+      (click)="deleteAuthor(authorIndex)"
+      class="cursor-pointer rounded border border-gray-300 px-4 py-2 text-gray-700 transition-colors hover:bg-gray-50"
+    >
+      Remove Author
+    </button>
+    }
+    <button
+      type="button"
+      (click)="addAuthor()"
+      class="cursor-pointer rounded border border-gray-300 px-4 py-2 text-gray-700 transition-colors hover:bg-gray-50"
+    >
+      Author hinzufügen
+    </button>
 
     <label class="mt-4 block">
       <span class="mb-2 block">Abstract</span>
