@@ -15,11 +15,9 @@
 
 <div class="book-grid">
   @for (book of booksComputed(); track book.isbn) {
-  <app-book-card
-    [book]="book"
-    [markText]="searchTerm()"
-    (detailClick)="goToBookDetails($event)"
-    (deleteClick)="deleteBook($event)"
-  />
+  <app-book-card [book]="book" [markText]="searchTerm()">
+    <a [routerLink]="['detail', book.isbn]" class="btn-secondary">More</a>
+    <button type="button" class="btn-danger" (click)="deleteBook(book)">Delete</button>
+  </app-book-card>
   }
 </div>

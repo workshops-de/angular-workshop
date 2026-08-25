@@ -1,4 +1,4 @@
-import { Component, input, output, signal } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
 import { Book } from '../book';
 import { Marker } from '../marker';
 
@@ -14,22 +14,6 @@ export class BookCard {
 
   readonly book = input.required<Book>();
   readonly markTerm = input('');
-  readonly detailClick = output<Book>();
-  readonly deleteClick = output<Book>();
 
-  handleDetailClick(click: MouseEvent) {
-    click.preventDefault();
-
-    console.log('Click Details-Link:', click);
-
-    this.detailClick.emit(this.book());
-  }
-
-  handleDeleteClick(click: MouseEvent) {
-    click.preventDefault();
-
-    console.log('Click Delete-Button:', click);
-
-    this.deleteClick.emit(this.book());
-  }
+  readonly searchTerm = input('');
 }
