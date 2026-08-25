@@ -16,5 +16,10 @@ export const bookRoutes: Routes = [
     path: 'detail/:isbn',
     loadComponent: () => import('./book-detail-page/book-detail-page').then(c => c.BookDetailPage),
     canDeactivate: [confirmLeaveGuardFn]
+  },
+  {
+    path: 'edit/:isbn',
+    loadComponent: () =>
+      import('./book-edit/book-edit-page').then(c => c.BookEditPage)
   }
 ];
