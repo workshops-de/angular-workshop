@@ -1,5 +1,5 @@
 import { HttpClient, httpResource } from '@angular/common/http';
-import { inject, Service } from '@angular/core';
+import { inject, Service, Signal } from '@angular/core';
 import { Observable } from 'rxjs';
 import * as v from 'valibot';
 import { Book, BooksCollectionSchema } from './book';
@@ -25,6 +25,10 @@ export class BooksClient {
         parse: value => v.parse(BooksCollectionSchema, value)
       }
     );
+  }
+
+  getByIsbnResource(isbn: Signal<string>) {
+    return httpResource<Book>(() => ({ url: `${this.#baseUrl}/books/${isbn()}` }));
   }
 
   create(book: Partial<Book>): Observable<Book> {

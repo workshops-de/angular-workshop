@@ -15,5 +15,10 @@ export const bookRoutes: Routes = [
   {
     path: 'detail/:isbn',
     loadComponent: () => import('./book-detail-page/book-detail-page').then(c => c.BookDetailPage)
+  },
+  {
+    path: 'edit/:isbn',
+    loadComponent: () =>
+      import('./book-edit-page/book-edit-page').then(c => c.BookEditPage)
   }
 ];
