@@ -1,7 +1,7 @@
 import { Component, computed, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 
-import { Router } from '@angular/router';
 import { bookMatches } from '@workshop-support';
 import { Book } from '../book';
 import { BookCard } from '../book-card/book-card';
@@ -10,7 +10,7 @@ import { BooksClient } from '../books-client';
 
 @Component({
   selector: 'app-books-page',
-  imports: [BookCard],
+  imports: [BookCard, RouterLink],
   providers: [BookMarkerStore],
   templateUrl: './books-page.html'
 })
