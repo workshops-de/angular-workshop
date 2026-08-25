@@ -5,7 +5,9 @@
     <label class="mt-4 block">
       <span class="mb-2 block">ISBN</span>
       <input [formField]="form.isbn" class="min-w-[250px] rounded border border-gray-300 px-5 py-3" />
-      @if (form.isbn().touched()) {
+      @if (form.isbn().pending()) {
+        <small class="block text-gray-500">Checking ISBN…</small>
+      } @else if (form.isbn().touched()) {
         @for (error of form.isbn().errors(); track error.kind) {
           <small class="block text-gray-700">{{ error.message }}</small>
         }
