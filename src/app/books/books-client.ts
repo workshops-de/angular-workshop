@@ -1,15 +1,31 @@
 import { HttpClient, httpResource } from '@angular/common/http';
 import { inject, Injectable, Signal } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Book } from './book';
+import * as v from 'valibot';
+import { Book, BooksCollectionSchema } from './book';
+
+/**
+ *
+ *  HttpClient (Observables) vs.  httpResource (Signal) + state
+ *                           |
+ *                           |
+ *                           /\
+ *                        HttpBackend
+ *                        - same config
+ *                        - same testing
+ *
+ */
 
 @Injectable({ providedIn: 'root' })
 export class BooksClient {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = 'http://localhost:4730';
 
-  getAll(): Observable<Book[]> {
-    return this.http.get<Book[]>(`${this.baseUrl}/books`);
+  getAll() {
+    return httpResource<Book[]>(() => ({ url: `${this.baseUrl}/books` }), {
+      defaultValue: [],
+      parse: value => v.parse(BooksCollectionSchema, value)
+    });
   }
 
   getByIsbnResource(isbn: Signal<string>) {

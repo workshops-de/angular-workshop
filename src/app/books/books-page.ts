@@ -1,5 +1,4 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { BookCard } from './book-card/book-card';
 import { BooksClient } from './books-client';
@@ -13,14 +12,15 @@ export class BooksPage {
   private readonly booksClient = inject(BooksClient);
 
   searchTerm = signal('');
-  books = toSignal(this.booksClient.getAll(), { initialValue: [] });
+  booksResource = this.booksClient.getAll();
 
   booksComputed = computed(() => {
     const searchTerm = this.searchTerm().toLocaleLowerCase();
-    const books = this.books();
+    //            this.books()
+    const books = this.booksResource.value();
 
     return !searchTerm
       ? books
-      : books.filter(book => book.title.toLocaleLowerCase().includes(searchTerm));
+      : books?.filter(book => book.title.toLocaleLowerCase().includes(searchTerm));
   });
 }

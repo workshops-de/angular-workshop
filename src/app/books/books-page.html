@@ -14,6 +14,13 @@
   </a>
 </div>
 
+@if(booksResource.isLoading()) {
+<p>Loading books...</p>
+} @else if (booksResource.error(); as error) {
+<p>Error: {{error.message}}</p>
+} 
+
+
 @for (book of booksComputed(); track book.isbn) {
 <app-book-card [content]="book">
   <a
