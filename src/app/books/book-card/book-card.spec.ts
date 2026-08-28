@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { render, screen } from '@testing-library/angular';
 import { BookCard } from './book-card';
 import { Book } from '../book';
 
@@ -11,25 +11,15 @@ describe('BookCard', () => {
     abstract: 'A whale of a tale.'
   };
 
-  let component: BookCard;
-  let fixture: ComponentFixture<BookCard>;
+  it('should display the book title', async () => {
+    await render(BookCard, { componentInputs: { content: book } });
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-
-    fixture = TestBed.createComponent(BookCard);
-    component = fixture.componentInstance;
-    fixture.componentRef.setInput('content', book);
-    fixture.detectChanges();
+    expect(screen.getByText(book.title)).toBeInTheDocument();
   });
 
-  it('should display the book title', () => {
-    const title = fixture.nativeElement.querySelector('h3');
-    expect(title.textContent).toContain('Moby Dick');
-  });
+  it('should display the book author', async () => {
+    await render(BookCard, { componentInputs: { content: book } });
 
-  it('should display the book author', () => {
-    const author = fixture.nativeElement.querySelector('h4');
-    expect(author.textContent).toContain('Herman Melville');
+    expect(screen.getByText(book.author!)).toBeInTheDocument();
   });
 });
