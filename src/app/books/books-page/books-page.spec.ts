@@ -1,9 +1,18 @@
-import { signal } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
 import { render, screen } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
 import { BooksPage } from './books-page';
+import { BookCard } from '../book-card/book-card';
 import { BooksClient } from '../books-client';
 import { Book } from '../book';
+
+@Component({
+  selector: 'app-book-card',
+  template: `<div data-testid="mock-book-card">{{ book().title }}</div>`
+})
+class BookCardMock {
+  book = input.required<Book>();
+}
 
 describe('BooksPage', () => {
   const mobyDick: Book = {
@@ -29,6 +38,7 @@ describe('BooksPage', () => {
     };
 
     await render(BooksPage, {
+      importOverrides: [{ replace: BookCard, with: BookCardMock }],
       providers: [{ provide: BooksClient, useValue: booksClientMock }]
     });
 
@@ -43,6 +53,7 @@ describe('BooksPage', () => {
     };
 
     await render(BooksPage, {
+      importOverrides: [{ replace: BookCard, with: BookCardMock }],
       providers: [{ provide: BooksClient, useValue: booksClientMock }]
     });
 
@@ -51,5 +62,21 @@ describe('BooksPage', () => {
 
     expect(screen.getByText(mobyDick.title)).toBeInTheDocument();
     expect(screen.queryByText(friends.title)).not.toBeInTheDocument();
+  });
+
+  it('renders one book card per book, without depending on BookCard internals', async () => {
+    const booksClientMock = {
+      getAll: vi.fn().mockReturnValue(mockBooksResource([mobyDick, friends]))
+    };
+
+    await render(BooksPage, {
+      importOverrides: [{ replace: BookCard, with: BookCardMock }],
+      providers: [{ provide: BooksClient, useValue: booksClientMock }]
+    });
+
+    const cards = screen.getAllByTestId('mock-book-card');
+    expect(cards).toHaveLength(2);
+    expect(cards[0]).toHaveTextContent('Moby Dick');
+    expect(cards[1]).toHaveTextContent('How to win friends');
   });
 });
