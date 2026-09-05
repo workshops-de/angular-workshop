@@ -1,3 +1,78 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'tailwindcss';
+
+/* --- Layout / page structure --- */
+@utility page {
+  @apply m-4;
+}
+@utility form-actions {
+  @apply mt-4;
+}
+
+/* --- Navigation --- */
+@utility nav-bar {
+  @apply m-0 flex list-none bg-gray-800 p-0;
+}
+@utility nav-link {
+  @apply block px-4 py-3.5 text-center text-white;
+  &:hover {
+    @apply bg-black;
+  }
+}
+@utility nav-link-active {
+  @apply bg-green-500;
+}
+
+/* --- Buttons / button-styled links --- */
+@utility btn-primary {
+  @apply inline-block cursor-pointer rounded bg-blue-600 px-4 py-2 text-white transition-colors;
+  &:hover {
+    @apply bg-blue-700;
+  }
+  &:disabled {
+    @apply cursor-not-allowed opacity-50;
+  }
+}
+@utility btn-secondary {
+  @apply inline-block cursor-pointer rounded border border-gray-300 px-4 py-2 text-gray-700 transition-colors;
+  &:hover {
+    @apply bg-gray-50;
+  }
+}
+
+/* --- Form fields --- */
+@utility search-field {
+  @apply m-4 block min-w-[250px] rounded border border-gray-300 px-5 py-3;
+}
+@utility field-input {
+  @apply min-w-[250px] rounded border border-gray-300 px-5 py-3;
+}
+@utility field-label {
+  @apply mt-4 block;
+}
+@utility field-label-text {
+  @apply mb-2 block;
+}
+@utility field-error {
+  @apply block text-red-700;
+}
+@utility field-hint {
+  @apply block text-blue-500;
+}
+
+/* --- Cards --- */
+@utility book-card {
+  @apply m-4 inline-block w-[300px] rounded-xs p-4 shadow-md transition-shadow;
+  &:hover {
+    @apply shadow-xl;
+  }
+}
+
+/* --- Content pages --- */
+@utility about-section {
+  @apply grid h-[50vh] place-items-center text-center text-blue-800;
+}
+@utility text-link {
+  @apply text-blue-800 underline;
+}
