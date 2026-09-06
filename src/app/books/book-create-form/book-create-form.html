@@ -1,34 +1,36 @@
 <div class="app-content">
   <h1 class="page-title">Create Book</h1>
 
-  <form class="form-fields">
+  <form class="form-fields" [formRoot]="form">
     <label class="field-label">
       <span class="field-label-text">ISBN</span>
-      <input class="field-input w-full" name="isbn" />
+      <input class="field-input w-full" [formField]="form.isbn" />
     </label>
 
     <label class="field-label">
       <span class="field-label-text">Title</span>
-      <input class="field-input w-full" name="title" />
+      <input class="field-input w-full" [formField]="form.title" />
     </label>
 
     <label class="field-label">
       <span class="field-label-text">Subtitle</span>
-      <input class="field-input w-full" name="subtitle" />
+      <input class="field-input w-full" [formField]="form.subtitle" />
     </label>
 
     <label class="field-label">
       <span class="field-label-text">Author</span>
-      <input class="field-input w-full" name="author" />
+      <input class="field-input w-full" [formField]="form.author" />
     </label>
 
     <label class="field-label">
       <span class="field-label-text">Abstract</span>
-      <input class="field-input w-full" name="abstract" />
+      <input class="field-input w-full" [formField]="form.abstract" />
     </label>
 
     <div class="form-actions">
-      <button type="submit" class="btn-primary">Save</button>
+      <button type="submit" class="btn-primary" [disabled]="form().invalid()">
+        Save
+      </button>
     </div>
   </form>
 </div>
