@@ -5,11 +5,21 @@
     <label class="field-label">
       <span class="field-label-text">ISBN</span>
       <input class="field-input w-full" [formField]="form.isbn" />
+      @if (form.isbn().touched()) {
+        @for (error of form.isbn().errors(); track error.kind) {
+          <small class="field-error">{{ error.message }}</small>
+        }
+      }
     </label>
 
     <label class="field-label">
       <span class="field-label-text">Title</span>
       <input class="field-input w-full" [formField]="form.title" />
+      @if (form.title().touched()) {
+        @for (error of form.title().errors(); track error.kind) {
+          <small class="field-error">{{ error.message }}</small>
+        }
+      }
     </label>
 
     <label class="field-label">
@@ -20,6 +30,11 @@
     <label class="field-label">
       <span class="field-label-text">Author</span>
       <input class="field-input w-full" [formField]="form.author" />
+      @if (form.author().touched()) {
+        @for (error of form.author().errors(); track error.kind) {
+          <small class="field-error">{{ error.message }}</small>
+        }
+      }
     </label>
 
     <label class="field-label">
