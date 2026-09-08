@@ -1,4 +1,5 @@
 import { Component, input, signal } from '@angular/core';
+import { Book } from '../book';
 
 @Component({
   selector: 'app-book-card',
@@ -9,6 +10,5 @@ export class BookCard {
 
   readonly placeholderCover = 'book-cover-placeholder.svg';
 
-  // TODO: Replace any with proper type since can it cause critical runtime errors.
-  readonly book = input<any>();
+  readonly book = input.required<Book>();
 }
