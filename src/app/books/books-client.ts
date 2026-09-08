@@ -1,6 +1,19 @@
 import { httpResource } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Book } from './book';
+import * as v from 'valibot';
+import { Book, BooksCollectionSchema } from './book';
+
+/**
+ *
+ *  HttpClient (Observables) vs.  httpResource (Signal) + state
+ *                           |
+ *                           |
+ *                           /\
+ *                        HttpBackend
+ *                        - same config
+ *                        - same testing
+ *
+ */
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +33,8 @@ export class BooksClient {
         }
       }),
       {
-        defaultValue: []
+        defaultValue: [],
+        parse: value => v.parse(BooksCollectionSchema, value)
       }
     );
   }
