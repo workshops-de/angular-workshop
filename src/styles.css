@@ -90,6 +90,38 @@
   @apply mt-auto flex gap-2 pt-3;
 }
 
+/* --- Book detail page --- */
+@utility book-detail {
+  @apply flex max-w-3xl flex-col gap-6;
+}
+@utility book-detail-header {
+  @apply flex gap-6;
+}
+@utility book-detail-cover {
+  @apply h-60 w-40 shrink-0 rounded border border-gray-200 bg-[#eef2f7] object-cover;
+}
+@utility book-detail-meta {
+  @apply flex min-w-0 flex-col gap-1;
+}
+@utility book-detail-title {
+  @apply text-2xl font-semibold text-gray-900;
+}
+@utility book-detail-author {
+  @apply text-lg font-semibold text-blue-800;
+}
+@utility book-detail-isbn {
+  @apply text-sm text-gray-500;
+}
+@utility book-detail-abstract {
+  @apply leading-relaxed text-gray-700;
+}
+@utility back-link {
+  @apply mb-2 inline-flex items-center gap-1.5 text-sm font-medium text-blue-800;
+  &:hover {
+    @apply underline;
+  }
+}
+
 /* --- Content pages --- */
 @utility about-section {
   @apply grid h-[50vh] place-items-center text-center text-blue-800;
