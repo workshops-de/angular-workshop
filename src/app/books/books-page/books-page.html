@@ -4,15 +4,14 @@
   class="search-field"
   type="search"
   placeholder="Search..."
-  [value]="searchTerm()"
-  (input)="searchTerm.set($event.target.value)"
+  [value]="bookMarkerStore.markTerm()"
+  (input)="bookMarkerStore.setMarkTerm($event.target.value)"
 />
 
 <div class="book-grid">
   @for (book of booksComputed(); track book.id) {
   <app-book-card
     [book]="book"
-    [markTerm]="searchTerm()"
     (detailClick)="goToBookDetails($event)"
     (deleteClick)="deleteBook($event)"
   />
