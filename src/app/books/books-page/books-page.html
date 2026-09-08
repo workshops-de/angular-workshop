@@ -7,8 +7,14 @@
   (input)="searchTerm.set($event.target.value)"
 />
 
+@if (booksResource.isLoading()) {
+<p>Loading books...</p>
+} @else if (booksResource.error(); as error) {
+<p>Error: {{ error.message }}</p>
+}
+
 <div class="book-grid">
-  @for (book of booksComputed(); track book.title) {
+  @for (book of booksComputed(); track book.isbn) {
   <app-book-card
     [book]="book"
     [markText]="searchTerm()"

@@ -15,11 +15,11 @@ export class BooksPage {
 
   // Initial value comes from a non-reactive, imperative API (localStorage).
   searchTerm = signal(localStorage.getItem('books.searchTerm') ?? '');
-  books = this.booksClient.getAll();
+  booksResource = this.booksClient.getAll();
 
   booksComputed = computed(() => {
     const searchTerm = this.searchTerm();
-    const books = this.books();
+    const books = this.booksResource.value();
 
     return books.filter(book => bookMatches(book, searchTerm));
   });
