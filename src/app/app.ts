@@ -1,12 +1,11 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 
-import { Sidebar, Welcome } from '@workshop-support';
+import { Sidebar } from '@workshop-support';
+import { BooksPage } from './books/books-page/books-page';
 
 @Component({
   selector: 'app-root',
-  imports: [Sidebar, Welcome],
+  imports: [Sidebar, BooksPage],
   templateUrl: './app.html'
 })
-export class App {
-  attendeeName = signal('Angularian');
-}
+export class App {}
