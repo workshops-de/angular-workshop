@@ -1,12 +1,12 @@
-import { Component, input, output, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { Component, input, output, signal } from '@angular/core';
 import { Book } from '../book';
-import { Marker } from '../marker';
+import { BookMarker } from '../book-marker';
 
 @Component({
   selector: 'app-book-card',
   templateUrl: './book-card.html',
-  imports: [DatePipe, Marker]
+  imports: [DatePipe, BookMarker]
 })
 export class BookCard {
   customStyle = signal({ color: '#064D9E', fontWeight: 600 });
@@ -14,7 +14,6 @@ export class BookCard {
   readonly placeholderCover = 'book-cover-placeholder.svg';
 
   readonly book = input.required<Book>();
-  readonly markTerm = input('');
   readonly detailClick = output<Book>();
   readonly deleteClick = output<Book>();
 

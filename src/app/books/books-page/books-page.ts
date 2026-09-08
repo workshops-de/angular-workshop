@@ -1,18 +1,21 @@
-import { Component, computed, effect, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 
 import { bookMatches } from '@workshop-support';
 import { Book } from '../book';
 import { BookCard } from '../book-card/book-card';
+import { BookMarkerStore } from '../book-marker-store';
 
 @Component({
   selector: 'app-books-page',
   imports: [BookCard],
+  providers: [BookMarkerStore],
   templateUrl: './books-page.html'
 })
 export class BooksPage {
+  bookMarkerStore = inject(BookMarkerStore);
+
   // Initial value comes from a non-reactive, imperative API (localStorage).
-  searchTerm = signal(localStorage.getItem('books.searchTerm') ?? '');
-  books = signal<Book[]>([
+  books = signal([
     {
       id: 'how-to-win-friends',
       title: 'How to win friends',
@@ -35,17 +38,11 @@ export class BooksPage {
   ]);
 
   booksComputed = computed(() => {
-    const searchTerm = this.searchTerm();
+    const markTerm = this.bookMarkerStore.markTerm();
     const books = this.books();
 
-    return books.filter(book => bookMatches(book, searchTerm));
+    return books.filter(book => bookMatches(book, markTerm));
   });
-
-  constructor() {
-    effect(() => {
-      localStorage.setItem('books.searchTerm', this.searchTerm());
-    });
-  }
 
   goToBookDetails(book: Book) {
     console.log('Navigate to book details, soon...');

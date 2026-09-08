@@ -1,17 +1,19 @@
 import { Directive, ElementRef, Renderer2, effect, inject, input } from '@angular/core';
 
 import { classifyMarkSegments } from '@workshop-support';
+import { BookMarkerStore } from './book-marker-store';
 
-@Directive({ selector: '[appMarker]' })
-export class Marker {
+@Directive({ selector: '[appBookMarker]' })
+export class BookMarker {
   private renderer = inject(Renderer2);
   private host = inject<ElementRef<HTMLElement>>(ElementRef);
 
+  private bookMarkerStore = inject(BookMarkerStore);
+
   rawText = input.required<string | undefined>();
-  markTerm = input('');
 
   constructor() {
-    effect(() => this.markText(this.rawText(), this.markTerm()));
+    effect(() => this.markText(this.rawText(), this.bookMarkerStore.markTerm()));
   }
 
   private markText(rawText: string | undefined, markTerm: string) {
