@@ -1,5 +1,6 @@
-import { httpResource } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpClient, httpResource } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import * as v from 'valibot';
 import { Book, BooksCollectionSchema } from './book';
 
@@ -19,6 +20,7 @@ import { Book, BooksCollectionSchema } from './book';
   providedIn: 'root'
 })
 export class BooksClient {
+  private readonly http = inject(HttpClient);
   readonly #baseUrl = 'http://localhost:4730';
 
   getAll() {
@@ -37,5 +39,9 @@ export class BooksClient {
         parse: value => v.parse(BooksCollectionSchema, value)
       }
     );
+  }
+
+  delete(isbn: string): Observable<void> {
+    return this.http.delete<void>(`${this.#baseUrl}/books/${isbn}`);
   }
 }

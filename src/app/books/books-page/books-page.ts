@@ -1,4 +1,5 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
+import { lastValueFrom } from 'rxjs';
 
 import { bookMatches } from '@workshop-support';
 import { Book } from '../book';
@@ -35,8 +36,12 @@ export class BooksPage {
     console.table(book);
   }
 
-  deleteBook(book: Book) {
-    console.log('Delete book, soon...');
-    console.table(book);
+  async deleteBook(book: Book) {
+    if (!window.confirm(`Delete "${book.title}"?`)) {
+      return;
+    }
+
+    await lastValueFrom(this.booksClient.delete(book.isbn));
+    this.booksResource.reload();
   }
 }
