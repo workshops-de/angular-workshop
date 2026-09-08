@@ -1,4 +1,5 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 
 import { bookMatches } from '@workshop-support';
@@ -13,6 +14,7 @@ import { BooksClient } from '../books-client';
 })
 export class BooksPage {
   private readonly booksClient = inject(BooksClient);
+  private readonly router = inject(Router);
 
   // Initial value comes from a non-reactive, imperative API (localStorage).
   searchTerm = signal(localStorage.getItem('books.searchTerm') ?? '');
@@ -31,9 +33,8 @@ export class BooksPage {
     });
   }
 
-  goToBookDetails(book: Book) {
-    console.log('Navigate to book details, soon...');
-    console.table(book);
+  async goToBookDetails(book: Book) {
+    await this.router.navigate(['/books', 'detail', book.isbn]);
   }
 
   async deleteBook(book: Book) {

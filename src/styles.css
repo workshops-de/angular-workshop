@@ -146,6 +146,9 @@
     @apply underline;
   }
 }
+@utility book-detail-bar {
+  @apply flex flex-wrap items-center justify-between gap-4;
+}
 
 /* --- Content pages --- */
 @utility about-section {
