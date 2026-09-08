@@ -49,7 +49,7 @@
 
 /* --- Form fields --- */
 @utility search-field {
-  @apply m-4 block min-w-[250px] rounded border border-gray-300 px-5 py-3;
+  @apply mb-4 block w-full max-w-sm rounded border border-gray-300 px-4 py-2.5;
 }
 @utility field-input {
   @apply min-w-[250px] rounded border border-gray-300 px-5 py-3;
