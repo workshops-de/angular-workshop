@@ -1,13 +1,7 @@
 <div class="app-shell">
   <app-sidebar class="contents" />
 
-  <main class="app-welcome">
-    <img src="workshops-de-logo.png" alt="workshops.de" class="app-logo" />
-
-    <h1 class="text-3xl font-medium">Hello, {{ attendeeName() }} 👋</h1>
-    <p class="max-w-md text-gray-600">
-      Welcome to the Angular Intensive Workshop by workshops.de. In a moment you
-      will build your first component right here.
-    </p>
+  <main class="app-content">
+    <app-welcome>{{ attendeeName() }}</app-welcome>
   </main>
 </div>

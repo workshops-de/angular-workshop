@@ -166,6 +166,9 @@
     @apply bg-blue-600 text-white;
   }
 }
+@utility sidebar-separator {
+  @apply my-2 border-t border-gray-200;
+}
 
 /* --- Form layout (full-width page, capped field column) --- */
 @utility form-fields {
