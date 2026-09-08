@@ -1,7 +1,14 @@
 <h1 class="page-title">Books</h1>
 
+<input
+  class="search-field"
+  type="search"
+  placeholder="Search..."
+  (input)="searchTerm.set($event.target.value)"
+/>
+
 <div class="book-grid">
-  @for (book of books(); track book.title) {
+  @for (book of booksComputed(); track book.title) {
     <app-book-card
       [book]="book"
       (detailClick)="goToBookDetails($event)"
