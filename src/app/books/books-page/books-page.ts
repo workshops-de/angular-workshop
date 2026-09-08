@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 
+import { bookMatches } from '@workshop-support';
 import { Book } from '../book';
 import { BookCard } from '../book-card/book-card';
 
@@ -9,6 +10,7 @@ import { BookCard } from '../book-card/book-card';
   templateUrl: './books-page.html'
 })
 export class BooksPage {
+  searchTerm = signal('');
   books = signal<Book[]>([
     {
       title: 'How to win friends',
@@ -27,6 +29,13 @@ export class BooksPage {
       publishedAt: new Date('2009-10-29')
     }
   ]);
+
+  booksComputed = computed(() => {
+    const searchTerm = this.searchTerm();
+    const books = this.books();
+
+    return books.filter(book => bookMatches(book, searchTerm));
+  });
 
   goToBookDetails(book: Book) {
     console.log('Navigate to book details, soon...');
