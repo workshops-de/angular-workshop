@@ -1,6 +1,7 @@
 import { Component, computed, inject } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 
+import { Router } from '@angular/router';
 import { bookMatches } from '@workshop-support';
 import { Book } from '../book';
 import { BookCard } from '../book-card/book-card';
@@ -14,6 +15,7 @@ import { BooksClient } from '../books-client';
   templateUrl: './books-page.html'
 })
 export class BooksPage {
+  router = inject(Router);
   booksClient = inject(BooksClient);
   bookMarkerStore = inject(BookMarkerStore);
 
@@ -26,9 +28,8 @@ export class BooksPage {
     return books.filter(book => bookMatches(book, markTerm));
   });
 
-  goToBookDetails(book: Book) {
-    console.log('Navigate to book details, soon...');
-    console.table(book);
+  async goToBookDetails(book: Book) {
+    await this.router.navigate(['/books', 'detail', book.isbn]);
   }
 
   async deleteBook(book: Book) {
