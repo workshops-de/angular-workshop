@@ -1,10 +1,12 @@
 <div class="book-card">
+  @let currentBook = book();
+
   <img [src]="placeholderCover" alt="" class="book-cover" />
 
   <div class="book-card-body">
-    <h3>Mobby Dick</h3>
-    <h4 [style]="customStyle()">Hermann Melville</h4>
-    <p class="book-published">1851-10-18</p>
+    <h3>{{ currentBook.title }}</h3>
+    <h4 [style]="customStyle()">{{ currentBook.author }}</h4>
+    <p class="book-published">{{ currentBook.publishedAt.toLocaleDateString() }}</p>
     <div class="book-card-actions">
       <a href="" class="btn-secondary">More</a>
       <button type="button" class="btn-danger">Delete</button>
