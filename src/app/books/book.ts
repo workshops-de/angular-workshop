@@ -1,5 +1,5 @@
 export interface Book {
   title: string;
   author: string;
-  publishedAt?: string;
+  publishedAt: Date;
 }

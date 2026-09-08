@@ -1,7 +1,11 @@
 <h1 class="page-title">Books</h1>
 
-<app-book-card
-  [book]="book()"
-  (detailClick)="goToBookDetails($event)"
-  (deleteClick)="deleteBook($event)"
-/>
+<div class="book-grid">
+  @for (book of books(); track book.title) {
+    <app-book-card
+      [book]="book"
+      (detailClick)="goToBookDetails($event)"
+      (deleteClick)="deleteBook($event)"
+    />
+  }
+</div>
