@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, effect, signal } from '@angular/core';
 
 import { bookMatches } from '@workshop-support';
 import { Book } from '../book';
@@ -10,7 +10,8 @@ import { BookCard } from '../book-card/book-card';
   templateUrl: './books-page.html'
 })
 export class BooksPage {
-  searchTerm = signal('');
+  // Initial value comes from a non-reactive, imperative API (localStorage).
+  searchTerm = signal(localStorage.getItem('books.searchTerm') ?? '');
   books = signal<Book[]>([
     {
       title: 'How to win friends',
@@ -36,6 +37,12 @@ export class BooksPage {
 
     return books.filter(book => bookMatches(book, searchTerm));
   });
+
+  constructor() {
+    effect(() => {
+      localStorage.setItem('books.searchTerm', this.searchTerm());
+    });
+  }
 
   goToBookDetails(book: Book) {
     console.log('Navigate to book details, soon...');
