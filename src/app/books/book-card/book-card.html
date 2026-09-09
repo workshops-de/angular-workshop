@@ -4,14 +4,17 @@
   <img [src]="placeholderCover" alt="" class="book-cover" />
 
   <div class="book-card-body">
-    <h3>{{ currentBook.title }}</h3>
-    <h4 [style]="customStyle()">{{ currentBook.author }}</h4>
+    <h3 appMarker [rawText]="currentBook.title" [markTerm]="markTerm()"></h3>
+    <h4
+      [style]="customStyle()"
+      appMarker
+      [rawText]="currentBook.author"
+      [markTerm]="markTerm()"
+    ></h4>
     <p class="book-published">{{ currentBook.publishedAt.toLocaleDateString() }}</p>
     <div class="book-card-actions">
       <a href="" (click)="handleDetailClick($event)" class="btn-secondary">More</a>
-      <button type="button" (click)="handleDeleteClick($event)" class="btn-danger">
-        Delete
-      </button>
+      <button type="button" (click)="handleDeleteClick($event)" class="btn-danger">Delete</button>
     </div>
   </div>
 </div>

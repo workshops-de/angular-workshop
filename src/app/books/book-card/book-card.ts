@@ -1,8 +1,10 @@
 import { Component, input, output, signal } from '@angular/core';
 import { Book } from '../book';
+import { Marker } from '../marker';
 
 @Component({
   selector: 'app-book-card',
+  imports: [Marker],
   templateUrl: './book-card.html'
 })
 export class BookCard {
@@ -11,6 +13,7 @@ export class BookCard {
   readonly placeholderCover = 'book-cover-placeholder.svg';
 
   readonly book = input.required<Book>();
+  readonly markTerm = input('');
   readonly detailClick = output<Book>();
   readonly deleteClick = output<Book>();
 

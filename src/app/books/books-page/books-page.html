@@ -9,10 +9,11 @@
 
 <div class="book-grid">
   @for (book of booksComputed(); track book.title) {
-    <app-book-card
-      [book]="book"
-      (detailClick)="goToBookDetails($event)"
-      (deleteClick)="deleteBook($event)"
-    />
+  <app-book-card
+    [book]="book"
+    [markText]="searchTerm()"
+    (detailClick)="goToBookDetails($event)"
+    (deleteClick)="deleteBook($event)"
+  />
   }
 </div>
