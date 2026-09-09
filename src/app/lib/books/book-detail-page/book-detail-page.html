@@ -16,33 +16,5 @@
     Back to list
   </a>
 
-  <article class="book-detail">
-    <div class="book-detail-header">
-      <!-- [src]="book().cover || 'book-cover-placeholder.svg'" -->
-      <img src="book-cover-placeholder.svg" alt="" class="book-detail-cover" />
-
-      <div class="book-detail-meta">
-        <!-- {{ book().title }} -->
-        <h1 class="book-detail-title">Book title</h1>
-        <!-- {{ book().author }} -->
-        <p class="book-detail-author">Author name</p>
-        <!-- {{ book().isbn }} -->
-        <p class="book-detail-isbn">ISBN 978-3-86490-000-0</p>
-      </div>
-    </div>
-
-    <!-- {{ book().abstract }} -->
-    <p class="book-detail-abstract">
-      A short placeholder abstract for the prepared detail page. Replace this with
-      the real book abstract once the component loads its data. Two or three
-      sentences of body copy give the layout a realistic shape while you build.
-    </p>
-
-    <div class="book-card-actions">
-      <!-- [routerLink]="['/books', 'edit', book().isbn]" -->
-      <a href="" class="btn-secondary">Edit</a>
-      <!-- (click)="deleteBook()" once implemented -->
-      <button type="button" class="btn-danger">Delete</button>
-    </div>
-  </article>
+  <app-book-detail [book]="book()" />
 </div>

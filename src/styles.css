@@ -106,11 +106,29 @@
 @utility book-detail-title {
   @apply text-2xl font-semibold text-gray-900;
 }
+@utility book-detail-subtitle {
+  @apply text-base text-gray-600;
+}
 @utility book-detail-author {
   @apply text-lg font-semibold text-blue-800;
 }
+@utility book-detail-coauthors {
+  @apply text-sm text-gray-500;
+}
 @utility book-detail-isbn {
   @apply text-sm text-gray-500;
+}
+@utility book-detail-facts {
+  @apply mt-2 flex flex-wrap gap-x-6 gap-y-1 text-sm;
+  & > div {
+    @apply flex gap-1.5;
+  }
+  & dt {
+    @apply text-gray-400;
+  }
+  & dd {
+    @apply m-0 text-gray-700;
+  }
 }
 @utility book-detail-abstract {
   @apply leading-relaxed text-gray-700;
