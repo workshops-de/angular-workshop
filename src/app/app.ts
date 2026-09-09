@@ -9,6 +9,5 @@ import { Welcome } from './lib/shell/welcome/welcome';
   templateUrl: './app.html'
 })
 export class App {
-  // Task: replace this line and greet yourself with your own name.
   attendeeName = signal('Angularian');
 }
