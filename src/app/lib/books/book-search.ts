@@ -4,13 +4,13 @@
 // The parameter type is a structural subset (not `Book`) on purpose: the `Book`
 // shape changes a few times later in the workshop (typed interface -> valibot),
 // and this helper stays stable regardless.
-type SearchableBook = { title?: string; author?: string; abstract?: string };
+type SearchableBook = { title?: string; author?: string };
 
-const SEARCHABLE_FIELDS = ['title', 'author', 'abstract'] as const;
+const SEARCHABLE_FIELDS = ['title', 'author'] as const;
 
 /**
- * `true` when `term` (case-insensitive, trimmed) appears in the book's title,
- * author or abstract. An empty term matches every book.
+ * `true` when `term` (case-insensitive, trimmed) appears in the book's title
+ * or author. An empty term matches every book.
  */
 export function bookMatchesSearchTerm(book: SearchableBook, term: string): boolean {
   const needle = term.trim().toLowerCase();
