@@ -1,7 +1,6 @@
 import { Component, signal } from '@angular/core';
 
-import { Sidebar } from './lib/shell/sidebar/sidebar';
-import { Welcome } from './lib/shell/welcome/welcome';
+import { Sidebar, Welcome } from '@workshop-support';
 
 @Component({
   selector: 'app-root',
