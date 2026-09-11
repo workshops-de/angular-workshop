@@ -1,5 +1,5 @@
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, LOCALE_ID } from '@angular/core';
 
 export const appConfig: ApplicationConfig = {
-  providers: []
+  providers: [{ provide: LOCALE_ID, useValue: 'de' }]
 };
