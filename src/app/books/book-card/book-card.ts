@@ -1,9 +1,11 @@
 import { Component, input, output, signal } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { Book } from '../book';
 
 @Component({
   selector: 'app-book-card',
-  templateUrl: './book-card.html'
+  templateUrl: './book-card.html',
+  imports: [DatePipe]
 })
 export class BookCard {
   customStyle = signal({ color: '#064D9E', fontWeight: 600 });
