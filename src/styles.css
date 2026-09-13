@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'tailwindcss';
+@import '@angular/cdk/overlay-prebuilt.css';
 
 /* --- Layout / page structure --- */
 @utility page {
@@ -198,6 +199,31 @@
 /* --- Form layout (full-width page, capped field column) --- */
 @utility form-fields {
   @apply grid max-w-2xl gap-4;
+}
+
+/* --- Toast notifications --- */
+/* Positioning (fixed, bottom/right) is handled by the CDK Overlay global
+   position strategy in Notificator; this only lays out the stack itself. */
+@utility toast-host {
+  @apply flex flex-col gap-2;
+}
+@utility toast {
+  @apply flex min-w-[280px] max-w-sm items-start gap-3 rounded-md border px-4 py-3 text-sm shadow-md;
+}
+@utility toast-error {
+  @apply border-red-200 bg-red-50 text-red-700;
+}
+@utility toast-success {
+  @apply border-green-200 bg-green-50 text-green-700;
+}
+@utility toast-info {
+  @apply border-blue-200 bg-blue-50 text-blue-700;
+}
+@utility toast-close {
+  @apply cursor-pointer text-lg leading-none text-current opacity-60 transition-opacity;
+  &:hover {
+    @apply opacity-100;
+  }
 }
 
 /* --- Cover preview (book-edit-form) --- */
