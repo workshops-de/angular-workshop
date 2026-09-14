@@ -1,4 +1,5 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
+import { lastValueFrom } from 'rxjs';
 
 import { bookMatches } from '@workshop-support';
 import { Book } from '../book';
@@ -15,8 +16,6 @@ export class BooksPage {
   booksClient = inject(BooksClient);
   bookMarkerStore = inject(BookMarkerStore);
 
-  // Initial value comes from a non-reactive, imperative API (localStorage).
-  searchTerm = signal(localStorage.getItem('books.searchTerm') ?? '');
   booksResource = this.booksClient.getAll();
 
   booksComputed = computed(() => {
@@ -31,8 +30,12 @@ export class BooksPage {
     console.table(book);
   }
 
-  deleteBook(book: Book) {
-    console.log('Delete book, soon...');
-    console.table(book);
+  async deleteBook(book: Book) {
+    if (!window.confirm(`Delete "${book.title}"?`)) {
+      return;
+    }
+
+    await lastValueFrom(this.booksClient.delete(book.isbn));
+    this.booksResource.reload();
   }
 }
