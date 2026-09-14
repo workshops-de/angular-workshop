@@ -1,3 +1,7 @@
 <h1 class="page-title">Books</h1>
 
-<app-book-card [book]="book()" />
+<app-book-card
+  [book]="book()"
+  (detailClick)="goToBookDetails($event)"
+  (deleteClick)="deleteBook($event)"
+/>
