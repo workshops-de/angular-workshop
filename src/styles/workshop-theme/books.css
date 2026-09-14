@@ -28,6 +28,9 @@
 @utility book-detail-header {
   @apply flex gap-6;
 }
+@utility book-detail-bar {
+  @apply flex flex-wrap items-center justify-between gap-4;
+}
 @utility book-detail-cover {
   @apply h-60 w-40 shrink-0 rounded border border-gray-200 bg-[#eef2f7] object-cover;
 }

@@ -17,3 +17,9 @@
 @utility field-hint {
   @apply block text-blue-500;
 }
+@utility field-collection {
+  @apply mt-4 grid gap-2 rounded-lg border border-gray-200 bg-gray-50 p-4;
+}
+@utility field-collection-row {
+  @apply flex items-center gap-2;
+}
