@@ -2,12 +2,13 @@ import { Component, inject, signal } from '@angular/core';
 import { applyEach, form, FormField, FormRoot, required } from '@angular/forms/signals';
 import { firstValueFrom } from 'rxjs';
 import { BooksClient } from '../books-client';
+import { CoAuthorInput } from '../co-author-input/co-author-input';
 import { validAuthorName } from '../validators/author';
 import { uniqueIsbn } from '../validators/isbn';
 
 @Component({
   selector: 'app-book-create-form',
-  imports: [FormField, FormRoot],
+  imports: [FormField, FormRoot, CoAuthorInput],
   templateUrl: './book-create-form.html'
 })
 export class BookCreateForm {
