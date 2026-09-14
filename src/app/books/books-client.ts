@@ -1,10 +1,12 @@
-import { httpResource } from '@angular/common/http';
-import { Service } from '@angular/core';
+import { HttpClient, httpResource } from '@angular/common/http';
+import { inject, Service } from '@angular/core';
+import { Observable } from 'rxjs';
 import * as v from 'valibot';
 import { Book, BooksCollectionSchema } from './book';
 
 @Service()
 export class BooksClient {
+  private readonly http = inject(HttpClient);
   readonly #baseUrl = 'http://localhost:4730';
 
   getAll() {
@@ -23,5 +25,17 @@ export class BooksClient {
         parse: value => v.parse(BooksCollectionSchema, value)
       }
     );
+  }
+
+  create(book: Partial<Book>): Observable<Book> {
+    return this.http.post<Book>(`${this.#baseUrl}/books`, book);
+  }
+
+  update(isbn: string, book: Partial<Book>): Observable<Book> {
+    return this.http.put<Book>(`${this.#baseUrl}/books/${isbn}`, book);
+  }
+
+  delete(isbn: string): Observable<void> {
+    return this.http.delete<void>(`${this.#baseUrl}/books/${isbn}`);
   }
 }
