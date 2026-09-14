@@ -1,7 +1,7 @@
 <div class="book-card">
   @let currentBook = book();
 
-  <img [src]="placeholderCover" alt="" class="book-cover" />
+  <img [src]="currentBook.cover || placeholderCover" alt="" class="book-cover" />
 
   <div class="book-card-body">
     <h3 appMarker [rawText]="currentBook.title" [markTerm]="markTerm()"></h3>
