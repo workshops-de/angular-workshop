@@ -1,7 +1,13 @@
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ApplicationConfig, LOCALE_ID } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
+import { errorInterceptor } from './lib/error-interceptor';
+
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter([]), provideHttpClient(), { provide: LOCALE_ID, useValue: 'de' }]
+  providers: [
+    provideRouter([]),
+    provideHttpClient(withInterceptors([errorInterceptor])),
+    { provide: LOCALE_ID, useValue: 'de' }
+  ]
 };
