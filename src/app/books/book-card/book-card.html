@@ -9,7 +9,9 @@
     <p class="book-published">{{ currentBook.publishedAt.toLocaleDateString() }}</p>
     <div class="book-card-actions">
       <a href="" (click)="handleDetailClick($event)" class="btn-secondary">More</a>
-      <button type="button" class="btn-danger">Delete</button>
+      <button type="button" (click)="handleDeleteClick($event)" class="btn-danger">
+        Delete
+      </button>
     </div>
   </div>
 </div>

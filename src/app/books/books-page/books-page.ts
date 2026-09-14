@@ -15,4 +15,14 @@ export class BooksPage {
     author: 'Dale Carnegie',
     publishedAt: new Date('1936-10-01')
   });
+
+  goToBookDetails(book: Book) {
+    console.log('Navigate to book details, soon...');
+    console.table(book);
+  }
+
+  deleteBook(book: Book) {
+    console.log('Delete book, soon...');
+    console.table(book);
+  }
 }
