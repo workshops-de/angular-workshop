@@ -8,6 +8,12 @@
   (input)="bookMarkerStore.setMarkTerm($event.target.value)"
 />
 
+@if (booksResource.isLoading()) {
+<p>Loading books...</p>
+} @else if (booksResource.error(); as error) {
+<p>Error: {{ error.message }}</p>
+}
+
 <div class="book-grid">
   @for (book of booksComputed(); track book.id) {
   <app-book-card
