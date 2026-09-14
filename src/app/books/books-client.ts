@@ -1,6 +1,7 @@
 import { httpResource } from '@angular/common/http';
 import { Service } from '@angular/core';
-import { Book } from './book';
+import * as v from 'valibot';
+import { Book, BooksCollectionSchema } from './book';
 
 @Service()
 export class BooksClient {
@@ -18,7 +19,8 @@ export class BooksClient {
         }
       }),
       {
-        defaultValue: []
+        defaultValue: [],
+        parse: value => v.parse(BooksCollectionSchema, value)
       }
     );
   }
