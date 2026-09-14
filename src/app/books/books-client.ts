@@ -1,11 +1,14 @@
-import { httpResource } from '@angular/common/http';
-import { Service, Signal } from '@angular/core';
+import { HttpClient, httpResource } from '@angular/common/http';
+import { inject, Service, Signal } from '@angular/core';
+import { Observable } from 'rxjs';
 import * as v from 'valibot';
 import { Book, BooksCollectionSchema } from './book';
 
 @Service()
 export class BooksClient {
   #baseUrl = 'http://localhost:4730';
+
+  private readonly http = inject(HttpClient);
 
   getAll() {
     return httpResource<Book[]>(
@@ -29,5 +32,17 @@ export class BooksClient {
     return httpResource<Book>(() => ({
       url: `${this.#baseUrl}/books/${isbn()}`
     }));
+  }
+
+  create(book: Partial<Book>): Observable<Book> {
+    return this.http.post<Book>(`${this.#baseUrl}/books`, book);
+  }
+
+  update(isbn: string, book: Partial<Book>): Observable<Book> {
+    return this.http.put<Book>(`${this.#baseUrl}/books/${isbn}`, book);
+  }
+
+  delete(isbn: string): Observable<void> {
+    return this.http.delete<void>(`${this.#baseUrl}/books/${isbn}`);
   }
 }
