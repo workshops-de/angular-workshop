@@ -9,4 +9,11 @@ import { Sidebar, Welcome } from '@workshop-support';
 })
 export class App {
   warmWelcome = signal('Angularian');
+  greet = signal('Hello');
+
+  constructor() {
+    setTimeout(() => {
+      this.warmWelcome.update(warmWelcome => `${this.greet()} ${warmWelcome}`);
+    }, 6000);
+  }
 }
