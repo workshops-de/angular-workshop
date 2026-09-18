@@ -1,0 +1,6 @@
+{
+  "search.exclude": {
+    ".claude/": true,
+    ".agents/": true,
+  }
+}
