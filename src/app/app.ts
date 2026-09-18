@@ -8,5 +8,5 @@ import { Sidebar, Welcome } from '@workshop-support';
   templateUrl: './app.html'
 })
 export class App {
-  attendeeName = signal('Angularian');
+  warmWelcome = signal('Angularian');
 }
