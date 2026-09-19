@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Renderer2, effect, inject, input } from '@angular/core';
+import { Directive, ElementRef, Renderer2, afterRenderEffect, inject, input } from '@angular/core';
 
 import { classifyMarkSegments } from '@workshop-support';
 import { BookMarkerStore } from './book-marker-store';
@@ -13,7 +13,7 @@ export class BookMarker {
   rawText = input.required<string | undefined>();
 
   constructor() {
-    effect(() => this.markText(this.rawText(), this.bookMarkerStore.markTerm()));
+    afterRenderEffect(() => this.markText(this.rawText(), this.bookMarkerStore.markTerm()));
   }
 
   private markText(rawText: string | undefined, markTerm: string) {
