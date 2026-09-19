@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Renderer2, effect, inject, input } from '@angular/core';
+import { Directive, ElementRef, Renderer2, afterRenderEffect, inject, input } from '@angular/core';
 
 import { classifyMarkSegments } from '@workshop-support';
 
@@ -11,7 +11,7 @@ export class Marker {
   markTerm = input('');
 
   constructor() {
-    effect(() => this.markText(this.rawText(), this.markTerm()));
+    afterRenderEffect(() => this.markText(this.rawText(), this.markTerm()));
   }
 
   private markText(rawText: string | undefined, markTerm: string) {
