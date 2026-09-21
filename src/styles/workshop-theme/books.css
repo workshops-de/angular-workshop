@@ -67,7 +67,9 @@
 @utility book-detail-abstract {
   @apply leading-relaxed text-gray-700;
 }
-
+@utility book-detail-bar {
+  @apply flex flex-wrap items-center justify-between gap-4;
+}
 /* --- Cover preview (book-edit-form) --- */
 @utility cover-preview {
   @apply flex items-start gap-4 rounded-md border border-gray-200 bg-white p-4;
