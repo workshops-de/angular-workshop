@@ -2,7 +2,7 @@
 set -euo pipefail
 shopt -s extglob
 
-# Fuzzy-find a "solve--" solution tag and check it out.
+# Fuzzy-find a "solution--" solution tag and check it out.
 #
 # Usage:
 #   tools/fuzzy-solution.sh [search-term]
@@ -17,7 +17,7 @@ shopt -s extglob
 #
 # Fuzzy means "characters in order": "fav" matches "form-async-validation".
 
-tag_prefix="solve--"
+tag_prefix="solution--"
 tty=/dev/tty
 
 die() { printf '%s\n' "$1" >&2; exit 1; }

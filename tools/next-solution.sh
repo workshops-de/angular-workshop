@@ -2,8 +2,8 @@
 set -euo pipefail
 
 # Checks out the next commit (in chronological order) whose message starts
-# with "solve--", following the "solution" branch from the current HEAD.
-# The "solve--" commits live on the solution branch, not on main, so we
+# with "solution--", following the "solution" branch from the current HEAD.
+# The "solution--" commits live on the solution branch, not on main, so we
 # walk forward along solution's history starting at the common ancestor
 # with HEAD.
 
@@ -26,14 +26,14 @@ mapfile -t next_shas < <(git log --reverse --format='%H' "$base_sha".."$solution
 next_sha=""
 for sha in "${next_shas[@]}"; do
   message=$(git log -1 --format='%s' "$sha")
-  if [[ "$message" == solve--* ]]; then
+  if [[ "$message" == solution--* ]]; then
     next_sha="$sha"
     break
   fi
 done
 
 if [[ -z "$next_sha" ]]; then
-  echo "No further solve-- commit found after HEAD on '$solution_branch'." >&2
+  echo "No further solution-- commit found after HEAD on '$solution_branch'." >&2
   exit 1
 fi
 
