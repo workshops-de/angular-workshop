@@ -12,6 +12,7 @@
   @for (book of booksComputed(); track book.id) {
   <app-book-card
     [book]="book"
+    [markTerm]="searchTerm()"
     (detailClick)="goToBookDetails($event)"
     (deleteClick)="deleteBook($event)"
   />
