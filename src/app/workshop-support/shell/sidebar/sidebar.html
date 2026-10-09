@@ -1,11 +1,17 @@
+@let links = pageLinks();
+
 <nav class="sidebar">
   <span class="sidebar-brand">
     <img src="workshops-de-logo.png" alt="" class="w-6" />
     Book Monkey
   </span>
 
-  <!-- Placeholder navigation - routing is added later in the workshop -->
-  <a class="sidebar-link sidebar-link-active">
+  <a
+    [routerLink]="links.dashboard"
+    routerLinkActive="sidebar-link-active"
+    [routerLinkActiveOptions]="{exact: true}"
+    class="sidebar-link"
+  >
     <svg
       viewBox="0 0 24 24"
       fill="none"
@@ -25,7 +31,12 @@
 
   <hr class="sidebar-separator" />
 
-  <a class="sidebar-link">
+  <a
+    [routerLink]="links.books"
+    routerLinkActive="sidebar-link-active"
+    [routerLinkActiveOptions]="{exact: true}"
+    class="sidebar-link"
+  >
     <svg
       viewBox="0 0 24 24"
       fill="none"
@@ -40,7 +51,13 @@
     </svg>
     Books
   </a>
-  <a class="sidebar-link">
+
+  <a
+    [routerLink]="links.booksCreate"
+    routerLinkActive="sidebar-link-active"
+    [routerLinkActiveOptions]="{exact: true}"
+    class="sidebar-link"
+  >
     <svg
       viewBox="0 0 24 24"
       fill="none"
