@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
-import { Welcome } from '@workshop-support';
+import { LoginHint, Welcome } from '@workshop-support';
+
+import { isUserAuthenticatedGuardFn } from './is-user-authenticated';
 
 export const routes: Routes = [
   {
@@ -9,6 +11,12 @@ export const routes: Routes = [
   },
   {
     path: 'books',
-    loadChildren: () => import('./books/book.routes').then(mod => mod.bookRoutes)
+    loadChildren: () => import('./books/book.routes').then(mod => mod.bookRoutes),
+    canMatch: [isUserAuthenticatedGuardFn]
+  },
+  {
+    // canMatch rejected the route above, so the router keeps looking and lands here.
+    path: 'books',
+    component: LoginHint
   }
 ];
