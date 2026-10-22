@@ -10,6 +10,6 @@ import { BookDetail } from '../book-detail/book-detail';
 })
 export class BookDetailPage {
   // private readonly booksClient = inject(BooksClient);
-  // isbn = input('');
+  // readonly isbn = input.required<string>();
   // bookResource = this.booksClient.getByIsbn(this.isbn);
 }
