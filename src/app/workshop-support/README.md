@@ -15,6 +15,9 @@ subfolders directly.
   `routerLink`/`routerLinkActive`.
 - **`Welcome`** ([`shell/welcome/welcome.ts`](./shell/welcome/welcome.ts)) —
   the welcome screen shown on the home page.
+- **`LoginHint`** ([`shell/login-hint/login-hint.ts`](./shell/login-hint/login-hint.ts)) —
+  a "Please log in" page. Used as fallback route when a `canMatch` guard
+  rejects the protected route.
 
 ### Books
 

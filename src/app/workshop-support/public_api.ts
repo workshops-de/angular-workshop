@@ -5,6 +5,7 @@
 
 export { Sidebar } from './shell/sidebar/sidebar';
 export { Welcome } from './shell/welcome/welcome';
+export { LoginHint } from './shell/login-hint/login-hint';
 
 export { bookMatches } from './books/book-matches';
 export { classifyMarkSegments } from './books/classify-mark-segments';
