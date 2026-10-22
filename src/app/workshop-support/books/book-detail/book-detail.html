@@ -53,11 +53,4 @@
   @if (book().abstract) {
     <p class="book-detail-abstract">{{ book().abstract }}</p>
   }
-
-  <div class="book-card-actions">
-    <!-- [routerLink]="['/books', 'edit', book().isbn]" once the router is wired -->
-    <a href="" class="btn-secondary">Edit</a>
-    <!-- (click)="deleteBook()" once implemented -->
-    <button type="button" class="btn-danger">Delete</button>
-  </div>
 </article>
