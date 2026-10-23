@@ -26,7 +26,7 @@
 
 | Command              | Description                                       |
 | -------------------- | ------------------------------------------------- |
-| `npx bookmonkey-api@4` | Installs and starts version 4 of the HTTP API "Bookmonkey API" |
+| `npx bookmonkey-api@5` | Installs and starts version 5 of the HTTP API "Bookmonkey API" |
 
 The API provides fake data that you can use in your Angular application.
 
