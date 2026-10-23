@@ -2,9 +2,9 @@ import { render, screen } from '@testing-library/angular';
 import { App } from './app';
 
 describe('App', () => {
-  it('greets the attendee', async () => {
+  it('renders the workshop shell', async () => {
     await render(App);
 
-    expect(screen.getByText(/Hello, Angularian/)).toBeInTheDocument();
+    expect(screen.getByRole('main')).toBeInTheDocument();
   });
 });
